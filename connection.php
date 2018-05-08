@@ -1,6 +1,6 @@
 <?php
     function connect(){
-        $con = mysqli_connect("localhost","root","MySQL","cervesium");
+        $con = mysqli_connect("localhost","root","root","cervesium");
 
         // Check connection
         if (mysqli_connect_errno())
