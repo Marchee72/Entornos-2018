@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
+<header>
+    <?php
+        $content = 'This is about us page content';
+        include('header.php');
+        ?>
+</header>
 <body>
-    <h1>Bienvenido a CERVESIUM</h1>
     <form action="//////.php" method="post">
         <fieldset>
             <p><label> Usuario <input type="text" name="usuario" size="25" /> </label></p>
