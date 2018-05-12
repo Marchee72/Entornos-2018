@@ -5,18 +5,24 @@
     <title>Document</title>
 </head>
 <header>
-    <?php
-        include('../html/header.html');
-    ?>
+
 </header>
 <body>
-    <form action="" method="post">
+    <form method="post">
         <fieldset>
             <p><label> Usuario <input type="text" name="usuario" size="25" /> </label></p>
             <p><label> Contraseña <input type="password" name="contraseña" size="25" /> </label></p>
-            <input type="submit" value="Enviar"/>
-            <p><a href="user_alta.html">Crear cuenta</a></p>
+            <input type="submit" value="Enviar" name="log"/>
+            <p><a href="../user_alta.html">Crear cuenta</a></p>
         </fieldset>
     </form>
+    <?php
+    if($_POST){
+        echo("hasta aca llega");
+        if(isset($_POST['log'])){
+            logIn();
+            }
+        }
+    ?>
 </body>
 </html>

@@ -9,21 +9,21 @@
 </head>
 
     <?php
-        include("../connection.php");
-        //include('../php/header.php');
+        include("connection.php");
+        include('header.php');
         include('../html/login.html');
 
         function logIn(){
-            connect();
+            $con = connect();
             $usuario = strtolower($_POST['usuario']);
             $pass = strtolower($_POST['contraseña']);
-            $sql = "SELECT usuario as user FROM usuarios WHERE nombre='$usuario' and pass='$contraseña'";
+            $sql = "SELECT * FROM usuarios WHERE nombre='$usuario' and pass='$pass'";
             $resultado = mysqli_query($con, $sql) or die (mysqli_error($con));
             $vUsuario = mysqli_fetch_assoc($resultado);
             mysqli_close($con);
-            if(!is_null($vUsuario["user"])){
-                $_SESSION["usuario"] = $vUsuario["user"]["nombre"];
-                setPermisos($vUsuario["user"]["tipo"]);
+            if(!is_null($vUsuario)){
+                $_SESSION["usuario"] = $vUsuario["nombre"];
+                setPermisos($vUsuario["tipo"]);
                 header("Location: '../user_alta.php'");            
             }
         }
@@ -36,10 +36,10 @@
                         INNER JOIN permisos p
                         ON p.idpermiso = ptu.idpermiso
                         WHERE tu.id = $tipoUsuario";
-            connect();
-            $result = mysqli_query($con, $query) or die (mysqli_error($con));
+            $c = connect();
+            $result = mysqli_query($c, $query) or die (mysqli_error($c));
             $permisos = mysqli_fetch_assoc($result);
-            mysqli_close($con);
+            mysqli_close($c);
             $_SESSION["permisos"] = $permisos;
         }
     ?>

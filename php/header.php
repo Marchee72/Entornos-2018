@@ -8,7 +8,6 @@
         <script src="main.js"></script>
     </head>
     <?php   
-        include("connection.php");
         include('../html/header.html');
     ?>
 
