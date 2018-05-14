@@ -14,7 +14,7 @@
         include('header.php');
         include('../html/login.html');
 
-        session_start();
+        //session_start();
         function logIn(){
             $con = connect();
             $usuario = strtolower($_POST["usuario"]);
@@ -27,7 +27,7 @@
             if(!is_null($vUsuario)){
                 $_SESSION["usuario"] = $vUsuario["nombre"];
                 setPermisos($vUsuario["tipo"]);
-                //echo '<pre>' . print_r($_SESSION["permisos"], TRUE) . '</pre>';
+                echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
                 //header("Location: user_alta.php");
                 $loged = True;            
             }
@@ -49,12 +49,19 @@
                         WHERE tu.id = $tipoUsuario";
             $c = connect();
             $result = mysqli_query($c, $query) or die (mysqli_error($c));
-            $permisos[] = mysqli_fetch_assoc($result);
+            //$permisos = mysqli_fetch_array($result);
             mysqli_close($c);
-            $_SESSION["permisos"] = $permisos;
-            foreach($_SESSION["permisos"] as $per){
-                echo $per["titulo"];
+            $i = 0;
+            while($p = mysqli_fetch_assoc($result)){
+                $_SESSION["permisos"][$i] = $p;
+                //print_r($p[$i]);
+                $i++;
             }
+
+            //$_SESSION["permisos"] = $permisos;
+            // foreach($permisos as $per){
+            //     echo $per;
+            // }
         }
     ?>
 

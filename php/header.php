@@ -13,8 +13,8 @@
         // echo($_SESSION["permisos"]["titulo"][0]);
         if(isset($_SESSION["usuario"])){
             echo("<nav class='nav'> <ul class='nav nav-tabs nav-justified' id='permisos'>");
-            foreach($_SESSION["permisos"]["titulo"] as $per){
-                echo("<li role='presentation'><a href='#'>".$per."</a></li>");
+            foreach($_SESSION["permisos"] as $per){
+                echo("<li role='presentation'><a href='#'>".$per["titulo"]."</a></li>");
             }
             echo("</ul> </nav>");
         }
