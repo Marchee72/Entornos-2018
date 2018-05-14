@@ -8,6 +8,7 @@
         <script src="main.js"></script>
     </head>
     <?php
+        session_start();
         include('../html/header.html');
         // echo($_SESSION["permisos"]["titulo"][0]);
         if(isset($_SESSION["usuario"])){
