@@ -8,17 +8,16 @@
 
 </header>
 <body>
-    <form method="post">
+    <form method="post" action>
         <fieldset>
             <p><label> Usuario <input type="text" name="usuario" size="25" /> </label></p>
             <p><label> Contraseña <input type="password" name="contraseña" size="25" /> </label></p>
-            <input type="submit" value="Enviar" name="log"/>
+            <input id="log" type="submit" value="Enviar" name="log"/>
             <p><a href="../user_alta.html">Crear cuenta</a></p>
         </fieldset>
     </form>
     <?php
     if($_POST){
-        echo("hasta aca llega");
         if(isset($_POST['log'])){
             logIn();
             }

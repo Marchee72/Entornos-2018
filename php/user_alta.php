@@ -2,10 +2,16 @@
 <head>
 <title>Alta Usuario</title>
 </head>
+<header>
+    <?php
+        include("header.php");
+    ?>
+</header>
 <body>
 <?php
 include("connection.php");
-connect();
+include("../html/user_alta.html");
+$con = connect();
 //$nombre = $_POST['nombre'];
 //$apellido = $_POST['apelido'];
 $usuario = $_POST['usuario'];
