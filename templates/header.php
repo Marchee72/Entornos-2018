@@ -1,23 +1,16 @@
-<doctype <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-        <script src="main.js"></script>
-    </head>
+
     <?php
         session_start();
-        include('../html/header.html');
-        // echo($_SESSION["permisos"]["titulo"][0]);
+        include_once('../templates/header.html');
+     
         if(isset($_SESSION["usuario"])){
-            echo("<nav class='nav'> <ul class='nav nav-tabs nav-justified' id='permisos'>");
+     /*       echo("<nav class='nav'> <ul class='nav nav-tabs nav-justified' id='permisos'>");
             foreach($_SESSION["permisos"] as $per){
                 echo("<li role='presentation'><a href='#'>".$per["titulo"]."</a></li>");
             }
             echo("</ul> </nav>");
-        }
+*/       
+	   }
 
         // if(isset($_SESSION["usuario"])){
         //     $dom = new DOMDocument();
@@ -31,4 +24,3 @@
         // }
         
     ?>
-</html>

@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="screen" href="../templates/footer.css" />
+        <script src="../js/jquery-3.3.1.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+		<style>
+	.dropdown-item{
+	display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+	}
+	
+	.dropdown-item:hover{
+	    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa
+	}
+		</style>
+  </head>
+  <body>
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top" width="100%">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="home.php">
+                        <img alt="Brand" src="..\beer.png" class="img-responsive float-left" width="50" height="50" >
+                    </a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+				<?php if(!isset($_SESSION["usuario"])){ ?>
+                    <li id="registrarse"><a href="../user_alta.php"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+                    <li id="ingresar"><a href="../php/login.php"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
+				<?php }else{ ?>
+					
+		<li class="dropdown show" id="usuario">
+				<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="linkUser" ><span class="glyphicon glyphicon glyphicon-user"></span> <?php if(isset($_SESSION["usuario"])){echo $_SESSION["usuario"];} ?> </a>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="#">Mi Cuenta</a>
+    <a class="dropdown-item" href="#">Notificaciones</a>
+    <a class="dropdown-item" href="logout.php">Desconexion</a>
+  </div>
+				</li>
+				
+				<?php } ?>
+				</ul>
+            </div>
+        </nav>
+        
+   
+    </header>
+</html>
