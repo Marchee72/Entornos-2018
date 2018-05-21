@@ -14,7 +14,7 @@
             include('php_old/connection.php');
             $con = connect();
 			$usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : die;
-            $pass = isset($_POST["contraseña"]) ? $_POST["contraseña"] : die;
+            $pass = isset($_POST["contraselña"]) ? $_POST["contraseña"] : die;
 		/*	echo "<h1 class='white'>Usuario: ".$usuario."</h1>";
 			echo "<h1 class='white'>Pass: ".$pass."</h1>";*/
 			
