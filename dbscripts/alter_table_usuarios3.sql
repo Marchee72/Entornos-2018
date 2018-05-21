@@ -1,0 +1,5 @@
+ALTER TABLE `cervesium`.`usuarios` 
+CHANGE COLUMN `pass` `pass` VARCHAR(32) CHARACTER SET 'utf8' NOT NULL ,
+CHANGE COLUMN `nombre` `nombre` VARCHAR(20) CHARACTER SET 'utf8' NOT NULL ,
+CHANGE COLUMN `apellido` `apellido` VARCHAR(20) CHARACTER SET 'utf8' NOT NULL ,
+ADD COLUMN `email` VARCHAR(50) NOT NULL AFTER `apellido`;
