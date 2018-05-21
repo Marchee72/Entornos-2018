@@ -23,7 +23,7 @@
             }
             else{
                // $loged = false;
-                echo("Usuario o contrasena incorrecta");
+                echo("Usuarioooo o contrasena incorrecta");
             }
 			//*/
         }

@@ -4,13 +4,13 @@
 </head>
 <header>
     <?php
-        include("header.php");
+        include("../templates/header.php");
     ?>
 </header>
 <body>
 <?php
 include("connection.php");
-include("../html/user_alta.html");
+include("../templates/user_alta.html");
 $con = connect();
 //$nombre = $_POST['nombre'];
 //$apellido = $_POST['apelido'];

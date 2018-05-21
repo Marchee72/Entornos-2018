@@ -11,23 +11,21 @@
 		}
 			
         function ingresar(){
-            include('php_old/connection.php');
+            include('connection.php');
             $con = connect();
 			$usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : die;
-            $pass = isset($_POST["contraselña"]) ? $_POST["contraseña"] : die;
+            $pass = isset($_POST["contraseña"]) ? $_POST["contraseña"] : die;
 		/*	echo "<h1 class='white'>Usuario: ".$usuario."</h1>";
 			echo "<h1 class='white'>Pass: ".$pass."</h1>";*/
-			
-		
-            
+	
         //    $usuario = $_POST["usuario"];
         //    $pass = $_POST["contraseña"];
-            $sql = "SELECT * FROM usuarios WHERE nombre='$usuario' and pass='$pass'";
+            $sql = "SELECT * FROM usuarios WHERE usuario='$usuario' and pass='$pass'";
 			$resultado = mysqli_query($con, $sql) or die (mysqli_error($con));
             $vUsuario = mysqli_fetch_assoc($resultado);
             mysqli_close($con);
             if(!is_null($vUsuario)){
-                $_SESSION["usuario"] = $vUsuario["nombre"];
+                $_SESSION["usuario"] = $vUsuario["usuario"];
                 //setPermisos($vUsuario["tipo"]);
                 echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
                 header("Location:home.php");
