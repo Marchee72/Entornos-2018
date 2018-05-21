@@ -1,7 +1,7 @@
 
     <?php
         session_start();
-        include_once('../templates/header.html');
+        include_once('templates/header.html');
      
         if(isset($_SESSION["usuario"])){
      /*       echo("<nav class='nav'> <ul class='nav nav-tabs nav-justified' id='permisos'>");

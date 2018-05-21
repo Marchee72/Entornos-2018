@@ -1,5 +1,5 @@
 <div class="container" style="position:relative;top:100px;">
-    <form method="post" action>
+    <form method="post" action="login/ingresar">
         <fieldset>
             <p><label> Usuario <input type="text" name="usuario" size="25" /> </label></p>
             <p><label> Contraseña <input type="password" name="contraseña" size="25" /> </label></p>
@@ -7,11 +7,5 @@
             <p><a href="../user_alta.html">Crear cuenta</a></p>
         </fieldset>
     </form>
-    <?php
-    if($_POST){
-        if(isset($_POST['log'])){
-            logIn();
-            }
-        }
-    ?>
+   
 </div>

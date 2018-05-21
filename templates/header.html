@@ -3,11 +3,15 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" media="screen" href="../templates/footer.css" />
-        <script src="../js/jquery-3.3.1.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <link href=<?php echo("/" . $ROOT_PATH . "/bootstrap/css/bootstrap.min.css")?> rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="screen" href=<?php echo("/" . $ROOT_PATH ."/templates/footer.css")?> />
+        <script src=<?php echo("/" . $ROOT_PATH ."/js/jquery-3.3.1.min.js")?>></script>
+        <script src=<?php echo("/" . $ROOT_PATH ."/bootstrap/js/bootstrap.min.js")?>></script>
 		<style>
+		.white{
+		color:white;
+		}
+		
 	.dropdown-item{
 	display: block;
     width: 100%;
@@ -26,21 +30,87 @@
     text-decoration: none;
     background-color: #f8f9fa
 	}
+	
+	.big-font p{
+	font-size:24px;
+}
+
+@media (max-width: 768px){
+.navbar-nav li a {
+    text-align:center;
+    margin: 0;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    background-color: #b7bdb6;
+    color: black;
+}
+}
+	
+	.cerventum-logo{
+	
+	}
+	.logo{
+	color:white;
+	font-size:24px;
+	}
+	
+	.logo:hover{
+	text-decoration: none;
+	color:white;
+	}
+	
+	.img-inline{
+	display:inline-block;
+	}
+	
+	.navbar{
+	border-radius:0;
+	
+	}
+	
+	.navbar-black{
+	background-color:#222;
+	}
+	
+	.navbar-black .navbar-nav>li>a{
+	color:#9d9d9d;
+	}
+	
+	.nav>li>a:hover{
+	background-color:#b7bdb6;
+	color:black;
+	}
+	
+	.navbar-inverse{
+	    border-bottom: 0px white;
+	}
+	
+	.navbar-nomargin{
+	margin:0;
+	}
+	
+	body{
+	background-color:#444;
+	user-select:none;
+	}
+	
 		</style>
   </head>
   <body>
     <header>
-        <nav class="navbar navbar-inverse navbar-fixed-top" width="100%">
+        <nav class="navbar navbar-inverse navbar-nomargin" width="100%">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a href="home.php">
-                        <img alt="Brand" src="..\beer.png" class="img-responsive float-left" width="50" height="50" >
+                    <a class="logo" href=<?php echo("/" . $ROOT_PATH . "/home/dashboard")?>>
+                        <img alt="Brand" src=<?php echo("/" . $ROOT_PATH ."/beer.png")?> class="img-responsive float-left img-inline" width="50" height="50" >
+						<span class="cerventum-logo">Cerventum</span>
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
 				<?php if(!isset($_SESSION["usuario"])){ ?>
-                    <li id="registrarse"><a href="../user_alta.php"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
-                    <li id="ingresar"><a href="../php/login.php"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
+                    <li id="registrarse"><a href=<?php echo("/" . $ROOT_PATH . "/registra/usuario")?>><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+                    <li id="ingresar"><a href=<?php echo("/" . $ROOT_PATH . "/login")?>><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
 				<?php }else{ ?>
 					
 		<li class="dropdown show" id="usuario">
@@ -57,6 +127,18 @@
             </div>
         </nav>
         
+		
+		  <nav class="navbar navbar-black" width="100%">
+            <div class="container-fluid">
+                
+                <ul class="nav navbar-nav">
+			        <li id="inicio"><a href=<?php echo("/" . $ROOT_PATH . "/home/dashboard")?>>Inicio</a></li>
+                    <li id="ofertas"><a href=<?php echo("/" . $ROOT_PATH . "/ofertas/listar")?>>Ofertas</a></li>				
+                    <li id="reserva"><a href=<?php echo("/" . $ROOT_PATH . "/reserva/listar")?>>Hace tu Reserva</a></li>				
+                    <li id="registra_cerveceria"><a href=<?php echo("/" . $ROOT_PATH . "/registra/cerveceria")?>>Registra tu Cerveceria</a></li>				
+			</ul>
+            </div>
+        </nav>
    
     </header>
 </html>
