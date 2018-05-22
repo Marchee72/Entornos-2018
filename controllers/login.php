@@ -35,12 +35,14 @@
 			$usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : die;
             $pass = isset($_POST["contraseña"]) ? $_POST["contraseña"] : die;
             $sql = "SELECT * FROM usuarios WHERE nombre='$usuario' and pass='$pass'";
+
 			$resultado = mysqli_query($con, $sql) or die (mysqli_error($con));
             $vUsuario = mysqli_fetch_assoc($resultado);
             mysqli_close($con);
             if(!is_null($vUsuario)){
                 $_SESSION["usuario"] = $vUsuario["nombre"];
                 $this->setPermisos($vUsuario["tipo"]);
+
                 header("Location:home.php");
              //   $loged = True;            
             }
