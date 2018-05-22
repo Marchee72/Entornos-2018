@@ -11,8 +11,7 @@
         }
         
         function setPermisos($tipoUsuario){
-            echo("tipo: ".$tipoUsuario);
-            $query = "SELECT p.titulo as 'titulo'
+            $query = "SELECT p.titulo as 'titulo', p.url as 'url'
                         FROM  tipo_usuario tu
                         INNER JOIN permiso_tipousuario ptu
                         ON ptu.idtipousuario = tu.id
@@ -21,12 +20,18 @@
                         WHERE tu.id = '$tipoUsuario'";
             $c = connect();
             $result = mysqli_query($c, $query) or die (mysqli_error($c));
-            $permisos = mysqli_fetch_array($result);
+            // $permisos = mysqli_fetch_assoc($result);
             //echo '<pre>' . print_r($permisos, TRUE) . '</pre>';
-            mysqli_close($c);
+            
             $_SESSION['permisos'] = [];
-            $_SESSION['permisos'] = $permisos[0];
-            $_SESSION['permisos'] = $permisos[1];
+            $i = 0;
+            while ($fila = mysqli_fetch_assoc($result)) {
+                $_SESSION["permisos"][$i] = $fila;
+                $i++;
+            }
+
+            mysqli_free_result($result);
+            mysqli_close($c);
         }
 			
         function ingresar(){
@@ -38,6 +43,7 @@
 
 			$resultado = mysqli_query($con, $sql) or die (mysqli_error($con));
             $vUsuario = mysqli_fetch_assoc($resultado);
+            //sqli_free_result($resultado);
             mysqli_close($con);
             if(!is_null($vUsuario)){
                 $_SESSION["usuario"] = $vUsuario["nombre"];
