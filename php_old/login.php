@@ -1,6 +1,4 @@
-
-
-    <?php
+ <?php
         include_once('../templates/header.php');
 		include("connection.php");
         include('../templates/login.html');
@@ -47,11 +45,6 @@
                 //print_r($p[$i]);
                 $i++;
             }
-			
-            //$_SESSION["permisos"] = $permisos;
-            // foreach($permisos as $per){
-            //     echo $per;
-            // }
         }
 		 include_once('../templates/footer.php');
     ?>

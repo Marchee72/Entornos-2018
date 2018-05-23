@@ -1,56 +1,38 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Bienvenido a CERVESIUM</h1>
-    <form action="..\user_alta.php" method="post">
-        <fieldset>
-            <p><label> Nombre  <input type="text" name="nombre" size="25" /> </label></p>
-            <p><label> Apellido <input type="text" name="apellido" size="25" /> </label></p>
-            <p><label> Nombre usuario <input type="text" name="usuario" size="25" /> </label></p>
-            <p><label> Email <input type="email" name="email" size="25" /> </label></p>
-            <p><label> Contraseña <input type="password" name="contraseña" size="25" /> </label></p>
-            <input type="submit" value="Crear cuenta"/>
-        </fieldset>
-    </form>
-</body>
-</html> -->
-
 
 <div class="container" style="position:relative;top:100px;">
-    <form method="post"  action="../registra/registrarNuevoUsuario">
+    <form method="post"  action="../registra/usuario" class="needs-validation">
         <div class="col-md-4 col-md-offset-4">
             <br>           
-             <div class="input-group">
+            <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Nombre</span>
-                <input type="text" name="nombre" class="form-control" placeholder="Nombre" aria-describedby="basic-addon1">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" aria-describedby="basic-addon1" required>
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon2">Apellido</span>
-                <input type="text" name="apellido" class="form-control" placeholder="Apellido" aria-describedby="basic-addon2">
+                <input type="text" name="apellido" class="form-control" placeholder="Apellido" aria-describedby="basic-addon2" required>
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon3">@</span>
-                <input type="text" name="email" class="form-control" placeholder="Email" aria-describedby="basic-addon3">
+                <input type="text" name="email" class="form-control" placeholder="Email" aria-describedby="basic-addon3" required>
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon4">Usuario</span>
-                <input type="text" name="usuario" class="form-control" placeholder="Usuario" aria-describedby="basic-addon4">
+                <input type="text" name="usuario" class="form-control" placeholder="Usuario" aria-describedby="basic-addon4" required>
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon5">Contraseña</span>
-                <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon5">
+                <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon5" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Crear cuenta</button>
         </div>
     </form>
 </div>
+
+
+
 

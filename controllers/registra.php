@@ -12,7 +12,7 @@
 	
 	function usuario(){
 	include('templates/registra.html');	
-	//$this->registrarNuevoUsuario();
+	$this->registrarNuevoUsuario();
 	}
 	
 	function registrarNuevoUsuario(){
@@ -32,7 +32,7 @@
 		$vCantUsuarios = mysqli_fetch_assoc($resultado);
 
 		if ($vCantUsuarios["cantidad"] !=0){
-			$this->usuario();
+			//$this->usuario();
 			echo ("El Usuario ya Existe<br>");
 		}
 		else {
@@ -40,7 +40,7 @@
 					values ('$usuario','$pass', '$tipo', '$valido', '$nombre', '$apellido', '$email')";
 			mysqli_query($con, $sql) or die (mysqli_error($con));
 			echo("El Usuario fue Registrado, valide su cuenta a traves del link que le enviamos al mail<br>");
-			$this->enviarMailValidacion($email);
+			//$this->enviarMailValidacion($email);
 			mysqli_free_result($resultado);
 		}
 		// Cerrar la conexion
@@ -73,7 +73,6 @@
 
 		header("Location: ../home/dashboard");
 	}
-
-
  }
+ include_once('templates/footer.php');
 ?>
