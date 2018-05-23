@@ -19,10 +19,7 @@
                         ON p.idpermiso = ptu.idpermiso
                         WHERE tu.id = '$tipoUsuario'";
             $c = connect();
-            $result = mysqli_query($c, $query) or die (mysqli_error($c));
-            // $permisos = mysqli_fetch_assoc($result);
-            //echo '<pre>' . print_r($permisos, TRUE) . '</pre>';
-            
+            $result = mysqli_query($c, $query) or die (mysqli_error($c));            
             $_SESSION['permisos'] = [];
             $i = 0;
             while ($fila = mysqli_fetch_assoc($result)) {
@@ -49,11 +46,9 @@
                 $_SESSION["usuario"] = $vUsuario["nombre"];
                 $this->setPermisos($vUsuario["tipo"]);
 
-                header("Location:home.php");
-             //   $loged = True;            
+                header("Location:home.php");            
             }
             else{
-               // $loged = false;
                 echo("Usuario o contrasena incorrecta");
             }
         }

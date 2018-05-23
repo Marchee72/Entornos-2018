@@ -108,29 +108,27 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-				<?php if(!isset($_SESSION["usuario"])){ ?>
-                    <li id="registrarse"><a href=<?php echo("/" . $ROOT_PATH . "/registra/usuario")?>><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
-                    <li id="ingresar"><a href=<?php echo("/" . $ROOT_PATH . "/login")?>><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
-				<?php }else{ ?>
-					
-		<li class="dropdown show" id="usuario">
-				<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="linkUser" ><span class="glyphicon glyphicon glyphicon-user"></span> <?php if(isset($_SESSION["usuario"])){echo $_SESSION["usuario"];} ?> </a>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Mi Cuenta</a>
-    <a class="dropdown-item" href="#">Notificaciones</a>
-    <a class="dropdown-item" href="../controllers/logout.php">Desconexion</a>
-  </div>
-				</li>
-				
-				<?php } ?>
+					<?php if(!isset($_SESSION["usuario"])){ ?>
+						<li id="registrarse"><a href=<?php echo("/" . $ROOT_PATH . "/registra/usuario")?>><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+						<li id="ingresar"><a href=<?php echo("/" . $ROOT_PATH . "/login")?>><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
+					<?php }else{ ?>
+
+					<li class="dropdown show" id="usuario">
+						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="linkUser" ><span class="glyphicon glyphicon glyphicon-user"></span> <?php if(isset($_SESSION["usuario"])){echo $_SESSION["usuario"];} ?> </a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<a class="dropdown-item" href="#">Mi Cuenta</a>
+							<a class="dropdown-item" href="#">Notificaciones</a>
+							<a class="dropdown-item" href="../controllers/logout.php">Desconexion</a>
+						</div>
+					</li>					
+					<?php } ?>
 				</ul>
             </div>
         </nav>
         
 		
-		  <nav class="navbar navbar-black" width="100%">
-            <div class="container-fluid">
-                
+		<nav class="navbar navbar-black" width="100%">
+            <div class="container-fluid">                
                 <ul class="nav navbar-nav">
 			        <li id="inicio"><a href=<?php echo("/" . $ROOT_PATH . "/home/dashboard")?>>Inicio</a></li>
                     <li id="ofertas"><a href=<?php echo("/" . $ROOT_PATH . "/ofertas/listar")?>>Ofertas</a></li>				
@@ -143,7 +141,7 @@
 						$i++;
 						 }
 					 } ?>				
-			</ul>
+				</ul>
             </div>
         </nav>
    
