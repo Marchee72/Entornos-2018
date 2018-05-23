@@ -12,11 +12,12 @@
 	
 	function usuario(){
 	include('templates/registra.html');	
-	$this->registrarNuevoUsuario();
+	//$this->registrarNuevoUsuario();
 	}
 	
 	function registrarNuevoUsuario(){
 		include('connection.php');
+		include("login.php");
 		$con = connect();
 		$nombre =  isset($_POST["nombre"]) ? $_POST["nombre"] : die;
 		$apellido =  isset($_POST["apellido"]) ? $_POST["apellido"] : die;
@@ -26,26 +27,27 @@
 		$tipo = isset($_POST["tipo"]) ? $_POST["tipo"] : 2; //USUARIO TIPO 2 ES UN USUARIO COMUN
 		$valido = 0; //NO ES VALIDO HASTA QUE SE VERIFIQUE POR MAIL
 
-		$sql = "SELECT Count(nombre) as cantidad FROM usuarios WHERE nombre='$usuario'";
+		$sql = "SELECT Count(nombre) as cantidad FROM usuarios WHERE usuario='$usuario'";
 		$resultado = mysqli_query($con, $sql) or die (mysqli_error($con));
 		$vCantUsuarios = mysqli_fetch_assoc($resultado);
 
 		if ($vCantUsuarios["cantidad"] !=0){
+			$this->usuario();
 			echo ("El Usuario ya Existe<br>");
-			echo ("<A href='home.html'>VOLVER AL MENU</A>");
 		}
 		else {
-			$sql = "INSERT INTO usuarios (nombre, pass, tipo, valido, nombre, apellido, email) 
+			$sql = "INSERT INTO usuarios (usuario, pass, tipo, valido, nombre, apellido, email) 
 					values ('$usuario','$pass', '$tipo', '$valido', '$nombre', '$apellido', '$email')";
 			mysqli_query($con, $sql) or die (mysqli_error($con));
-			echo("El Usuario fue Registrado<br>");
-			echo ("<A href='home.html'>VOLVER AL MENU</A>");
+			echo("El Usuario fue Registrado, valide su cuenta a traves del link que le enviamos al mail<br>");
 			// Liberar conjunto de resultados
 			mysqli_free_result($resultado);
 		}
 		// Cerrar la conexion
 		mysqli_close($con);
 	}
+
+
 
  }
 ?>
