@@ -40,13 +40,39 @@
 					values ('$usuario','$pass', '$tipo', '$valido', '$nombre', '$apellido', '$email')";
 			mysqli_query($con, $sql) or die (mysqli_error($con));
 			echo("El Usuario fue Registrado, valide su cuenta a traves del link que le enviamos al mail<br>");
-			// Liberar conjunto de resultados
+			$this->enviarMailValidacion($email);
 			mysqli_free_result($resultado);
 		}
 		// Cerrar la conexion
 		mysqli_close($con);
 	}
 
+	
+	function enviarMailValidacion($email){
+		$fecha=date("d-m-Y");
+		$hora= date("H :i:s");
+		$destino="$email"; 
+		$asunto="Validar mail cervecium";
+		$desde='From: no-contestar@cervecium.com';
+		$comentario= "
+		url valida mail
+		http://localhost/Entornos-2018/registra/validacion
+		
+		";
+		$a = mail($destino,$asunto,$comentario,$desde);
+		if($a)
+		echo "Se envio el mail";
+		else 
+		echo "No se ha podido enviar el mail";
+	}
+
+	function validacion($email){
+		$sql = "UPDATE usuarios SET valido='True' WHERE email = $email";
+		$resultado = mysqli_query($con, $sql) or die (mysqli_error($con));
+		mysqli_free_result($resultado);
+
+		header("Location: ../home/dashboard");
+	}
 
 
  }
