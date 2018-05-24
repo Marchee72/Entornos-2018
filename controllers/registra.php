@@ -33,13 +33,23 @@
 
 		if ($vCantUsuarios["cantidad"] !=0){
 			//$this->usuario();
-			echo ("El Usuario ya Existe<br>");
+			echo("<div>
+					<div class='alert alert-danger' role='alert'>
+						<h4 class='alert-heading'><strong>Error!</strong></h4>
+						El nombre de usuario ya fue seleccionado, ingrese uno distinto.
+					</div>
+				  </div>"); // TODO: HACER QUE LA PORONGA ESTA QUEDE ABAJO
 		}
 		else {
 			$sql = "INSERT INTO usuarios (usuario, pass, tipo, valido, nombre, apellido, email) 
 					values ('$usuario','$pass', '$tipo', '$valido', '$nombre', '$apellido', '$email')";
 			mysqli_query($con, $sql) or die (mysqli_error($con));
-			echo("El Usuario fue Registrado, valide su cuenta a traves del link que le enviamos al mail<br>");
+			echo("<div>
+					<div class='alert alert-success' role='alert'>
+						<h4 class='alert-heading'><strong>Exito!</strong></h4>
+						El Usuario fue registrado, valide su cuenta a traves del link que le enviamos por mail.
+					</div>
+				  </div>"); // TODO: NO PUEDO HACER QUE LA PORONGA ESTA QUEDE ABAJO
 			//$this->enviarMailValidacion($email);
 			mysqli_free_result($resultado);
 		}
