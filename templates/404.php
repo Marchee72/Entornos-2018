@@ -24,8 +24,8 @@
 </head>
 <body>
 
-<img class="img-center" src="Error_404.png" alt="Pagina no encontrada"></img>
-<a class="big-btn" href=<?php echo("/" . $ROOT_PATH . "/home/dashboard")?>>VOLVER</a>
+<img class="img-center" src=<?php echo ROOT_PATH  . "\Error_404.png"?> alt="Pagina no encontrada"></img>
+<a class="big-btn" href=<?php echo(ROOT_PATH . "/home/dashboard")?>>VOLVER</a>
 
 </body>
 </html>

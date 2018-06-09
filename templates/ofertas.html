@@ -1,9 +1,12 @@
 <div class="container white big-font">
 <h1>Ofertas</h1>
-<p>Lista de ofertas</p>
 <ul>
-<li>OFERTA1</li>
-<li>OFERTA2</li>
-<li>OFERTA3</li>
+<?php
+foreach($data as $off) { ?>
+
+    <li><img src=<?php echo $off->getimg() ?> width="128px" height="128px" alt=<?php echo $off->getdesctipo() ?>></img><label><?php echo $off->getdesc()?></label></li>
+
+
+<?php } ?>
 </ul>
 </div>

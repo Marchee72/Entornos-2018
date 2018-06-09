@@ -1,9 +1,53 @@
-<div class="container-fluid" style="position:relative;top:100px;">
-    <div align="center">
+<div class="container-fluid" style="position:relative;">
+
+		
+		<?php 
+		if(isset($result)){
+		
+		switch($result){
+			case 1:
+				echo ("<div class='alert alert-success' role='alert'>
+						<h4 class='alert-heading'><strong>Exito!</strong></h4>
+						El Usuario fue registrado, valide su cuenta a traves del link que le enviamos por mail.
+					</div>
+				</div>");
+			break;
+			case 0:
+				echo("<div>
+					<div class='alert alert-danger' role='alert'>
+						<h4 class='alert-heading'><strong>Error!</strong></h4>
+						El nombre de usuario ya fue seleccionado, ingrese uno distinto.
+					</div>
+				  </div>");
+			}
+		}
+		
+		if(isset($error)){
+		switch($error){
+			case 0:
+				echo("<div>
+					<div class='alert alert-danger' role='alert'>
+						<h4 class='alert-heading'><strong>Error!</strong></h4>
+						ERROR 0 SQL
+					</div>
+				  </div>");
+			break;
+			case 1:
+				echo("<div>
+					<div class='alert alert-danger' role='alert'>
+						<h4 class='alert-heading'><strong>Error!</strong></h4>
+						ERROR 1 SQL
+					</div>
+				  </div>");
+			}
+		}
+		?>	
+
+	<div align="center">
             <h1 style="color:white" class="display-1">Registrate!</h1>
             <p style="color: lightgrey">Es gratis.</p>
     </div>
-    <form method="post"  action="../registra/usuario" class="needs-validation">
+    <form method="post"  action=<?php echo ROOT_PATH . "/registra/usuario/doReg"?> class="needs-validation col-xs-12" >
         <div class="col-md-4 col-md-offset-4">
             <br>           
             <div class="input-group">
@@ -28,7 +72,7 @@
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon5">Contraseña</span>
-                <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon5" required>
+                <input type="password" name="pass" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon5" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Crear cuenta</button>

@@ -1,0 +1,21 @@
+<?php 
+if(isset($result)){
+switch($result){
+case 0:
+echo("<h1>Error</h1>
+	<p>Codigo invalido o ya se activo su registración</p>");
+break;
+
+
+case 1:
+echo("<h1>Registro finalizado</h1>
+	<p>Su cuenta fue registrada satisfactoriamente</p>");
+break;
+}
+
+}
+if(isset($error)){
+echo("<h1>Error</h1>");
+}
+
+?>

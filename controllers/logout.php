@@ -1,6 +1,11 @@
 <?php
-session_start();
+class logout{
 
+function init(){
+session_start();
 session_destroy();
-header("Location: ../home/dashboard");
+header("Location:".ROOT_PATH."/home/dashboard");	
+}
+
+}
 ?>

@@ -1,16 +1,30 @@
 <?php
-$ROOT_PATH = "Entornos-2018";
+define("ROOT_PATH","/Entornos-2018");
+
+
+//$ROOT_PATH = "Entornos-2018";
 if (isset($_GET['url'])){ 
 $url = $_GET["url"];
 $params = explode('/', $url);
-
+require("config/view.php");
  
 
 $path = "controllers/".$params[0].".php";
+//carga el controlador
 if(file_exists($path)){
 include('templates/header.php');
+//titulo del controlador
+
 include_once($path);
-$controller = new  $params[0];//load the controller
+$controller = new  $params[0];
+$model = "models/" .$params[0]. "/model.php";
+loadHeader($params[0]);
+$controller->view = new View();
+
+if(file_exists($model)){
+require($model);
+$model = new model();	
+}
 if(count($params) - 1 > 1){
 if(method_exists($controller,$params[1]))
 $controller->$params[1]($params[2]);//ejecute the method, and pass the param

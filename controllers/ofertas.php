@@ -11,7 +11,13 @@
 	}
 	
 	function listar(){
-		include_once("templates/ofertas.html");
+		$data = model::getofertas();
+		if($data != 0){
+		include_once("templates/ofertas.html");	
+		}else{
+			//msg: Error de conexion
+		}
+		
 	}
 	
 	//	 }else{

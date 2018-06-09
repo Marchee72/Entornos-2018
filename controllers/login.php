@@ -7,51 +7,56 @@
 		class login{
 		
 		function init(){
-		include('templates/login.html');	
-        }
+		//include('templates/login.html');
+			$vars = array();
+			if(isset($_GET["redirectTo"])){
+				$vars["redirect"] = $_GET["redirectTo"];
+			}
+			echo $this->view->render("templates/login.html",$vars); 
         
-        function setPermisos($tipoUsuario){
-            $query = "SELECT p.titulo as 'titulo', p.url as 'url'
-                        FROM  tipo_usuario tu
-                        INNER JOIN permiso_tipousuario ptu
-                        ON ptu.idtipousuario = tu.id
-                        INNER JOIN permisos p
-                        ON p.idpermiso = ptu.idpermiso
-                        WHERE tu.id = '$tipoUsuario'";
-            $c = connect();
-            $result = mysqli_query($c, $query) or die (mysqli_error($c));            
-            $_SESSION['permisos'] = [];
-            $i = 0;
-            while ($fila = mysqli_fetch_assoc($result)) {
-                $_SESSION["permisos"][$i] = $fila;
-                $i++;
-            }
-
-            mysqli_free_result($result);
-            mysqli_close($c);
-        }
-			
-        function ingresar(){
-            include('connection.php');
-            $con = connect();
+		}
+		
+		function usuario(){
 			$usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : die;
-            $pass = isset($_POST["contraseña"]) ? $_POST["contraseña"] : die;
-            $sql = "SELECT * FROM usuarios WHERE usuario='$usuario' and pass='$pass'";
+            $pass = isset($_POST["pass"]) ? $_POST["pass"] : die;
+			$datos = model::login($usuario,$pass);
+			
+			if($datos != null){
+				
+				 $_SESSION["usuario"] = $datos["usuario"];
+				$_SESSION["user_id"] = $datos["id"];
+				$_SESSION["email"] = $datos["email"];
+				//$this->setPermisos($vUsuario["tipo"]);  
+				if($datos["valido"]==1){
+				$_SESSION["tipo_usuario"] = $datos["nombretipo"];
 
-			$resultado = mysqli_query($con, $sql) or die (mysqli_error($con));
-            $vUsuario = mysqli_fetch_assoc($resultado);
-            //sqli_free_result($resultado);
-            mysqli_close($con);
-            if(!is_null($vUsuario)){
-                $_SESSION["usuario"] = $vUsuario["usuario"];
-                $this->setPermisos($vUsuario["tipo"]);
-
-                header("Location:home.php");            
-            }
-            else{
-                echo("Usuario o contrasena incorrecta");
-            }
-        }
+				if(isset($_GET["redirect"])){
+				header("Location:". ROOT_PATH . $_GET["redirect"]);
+				}else{
+					header("Location:".ROOT_PATH."/home/dashboard");
+				}
+			}else{
+				header("Location:".ROOT_PATH."/verifyemail");
+			}
+				
+			
+			}else{
+				  $vars["error"] = 1;	
+				  echo $this->view->render("templates/login.html",$vars); 
+			}
+		
+		}
+        
+        function __construct(){
+			if(isset($_SESSION["usuario"])){
+			if(isset($_SESSION["tipo_usuario"])){
+			header("Location:".ROOT_PATH."/home/dashboard");
+			}else{
+			header("Location:".ROOT_PATH."/verifyemail");	
+			}
+		}
+		}
+       
 
         
 		// include_once('../templates/footer.php');

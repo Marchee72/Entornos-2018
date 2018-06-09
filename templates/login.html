@@ -1,5 +1,16 @@
-<div class="container" style="position:relative;top:100px;">
-    <form method="post"  action="login/ingresar">
+
+<div class="container" style="position:relative;margin-bottom:38vh;">
+<?php 
+if(isset($error)){
+	echo("<div>
+					<div class='alert alert-danger' role='alert'>
+						<h4 class='alert-heading'><strong>Error!</strong></h4>
+						Nombre de usuario y/o contraseña incorrectos
+					</div>
+				  </div>");
+}
+?>
+    <form method="post"  action=<?php echo ROOT_PATH . "/login/usuario" .  (isset($redirect) ? "?redirect=" . $redirect : "")?> class="col-xs-12">
         <div class="col-md-4 col-md-offset-4">
             <br>           
              <div class="input-group">
@@ -9,7 +20,7 @@
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon2">Contraseña</span>
-                <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon2">
+                <input type="password" name="pass" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon2">
             </div>
             <br>
             <button id="log" name="log" type="submit" class="btn btn-primary left">Iniciar sesion</button>
