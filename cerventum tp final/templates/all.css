@@ -1,0 +1,266 @@
+.white{
+		color:white;
+		}
+		
+		
+	.dropdown-item{
+	display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+	}
+	
+	.dropdown-item:hover{
+	    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa
+	}
+	
+	.big-font p{
+	font-size:24px;
+}
+
+@media (max-width: 768px){
+.navbar-nav li a {
+    text-align:center;
+    margin: 0;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    background-color: #b7bdb6;
+    color: black;
+}
+}
+	
+	.cerventum-logo{
+	
+	}
+	.logo{
+	color:white;
+	font-size:24px;
+	}
+	
+	.logo:hover{
+	text-decoration: none;
+	color:white;
+	}
+	
+	.img-inline{
+	display:inline-block;
+	}
+	
+	.navbar{
+	border-radius:0;
+	
+	}
+	
+	.navbar-black{
+	background-color:#222;
+	}
+	
+	.navbar-black .navbar-nav>li>a{
+	color:#9d9d9d;
+	}
+	
+	.nav>li>a:hover{
+	background-color:#b7bdb6;
+	color:black;
+	}
+	
+	.navbar-inverse{
+	    border-bottom: 0px white;
+	}
+	
+	.navbar-nomargin{
+	margin:0;
+	}
+	
+	body{
+	background-color:#444;
+	user-select:none;
+	}
+	
+
+.fixed-popup{
+	position:fixed;
+}
+/* metodos sobreescritos de bootstrap */
+.card{
+	background: beige;
+    height: 25vh;
+}
+
+.card-body{
+	background:#eaead5;
+}
+
+.ofers img{
+float:left;
+}
+
+.ofers h5 button{
+	float:right;
+}
+
+.ofers p{
+	font-size:2.5vw;
+}
+
+.remark{
+	background: black;
+	color:white;
+	
+}
+
+
+@media (min-width: 760px) {
+.ofers p{
+	font-size: 2.1vw;
+}
+}
+
+.container-ofertas{
+	width:70%;
+}
+
+
+
+
+.lead{
+	margin-bottom: 0px;
+}
+
+
+
+
+
+
+.glyphicon { margin-right:5px; }
+.thumbnail
+{
+    margin-bottom: 20px;
+    padding: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.item.list-group-item
+{
+    float: none;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
+{
+    background: #428bca;
+}
+
+.item.list-group-item .list-group-image
+{
+    margin-right: 10px;
+}
+.item.list-group-item .thumbnail
+{
+    margin-bottom: 0px;
+}
+.item.list-group-item .caption
+{
+	padding: 9px 9px 0px 9px;
+	font-size: 24px;
+}
+.item.list-group-item:nth-of-type(odd)
+{
+    background: #eeeeee;
+}
+
+.of-horario{
+	margin-bottom: 10px;
+}
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+    display: table;
+    content: " ";
+}
+
+.item.list-group-item img
+{
+	float: left;
+}
+.item.list-group-item:after
+{
+    clear: both;
+}
+.list-group-item-text
+{
+    margin: 0 0 11px;
+}
+
+.col-md-6 {
+    width: 100%; 
+}
+
+
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.list-group{
+    margin-top: 20px;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+    
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+
+
+.list-group-item .caption .row .btn{
+	width:250px;
+	height: 40px;
+	margin-bottom: 10px;
+}
+
+.remove-offer{
+    right: 20px;
+    position: absolute;
+   
+}
+
+.remove-offer span{
+    font-size: 32px;
+    color:white;
+    background-color: black;
+}

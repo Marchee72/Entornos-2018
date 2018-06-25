@@ -1,0 +1,114 @@
+<div class="container-fluid" style="width:60%;">
+        <div class="well well-sm">
+            <strong>Ver</strong>
+            <div class="btn-group">
+                <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+                </span>Lista</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                    class="glyphicon glyphicon-th"></span>Grilla</a>
+            </div>
+        </div>
+        <div id="products" class="row list-group">
+                <?php foreach($ofertas as $off){
+                   
+                ?>
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail">
+                        <button type="button" class="close remove-offer" onclick="removeOffer(<?php echo $off->getidoferta();?>)" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                    <img class="group list-group-image" src="<?php echo $off->getImg()?>" alt="" />
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">
+                            <?php echo $off->gettitulo();?></h4>
+                        <p class="group inner list-group-item-text">
+                                <?php echo $off->getdesc();?>   
+                        </p>
+                       
+                        <div class="row row-eq-height">
+                            <div class="col-xs-12 col-md-6 of-horario">
+                                <p class="group">
+                                <p class="lead">
+                                    Desde</p>
+                                    <span class="remark"><?php echo $off->getfecha_desde_parsed()?></span>
+                                    <p class="lead">
+                                    Hasta </p>
+                                    <span class="remark"><?php echo $off->getfecha_hasta_parsed()?></span>
+                                </p>
+                                </div>
+                           
+                        </div>
+                        <div class="row row-eq-height">
+                                <div class="col-xs-12 col-md-6 text-right">
+                                        <a class="btn btn-success" href=<?php echo ROOT_PATH . "/ofertas/editarOferta/" . $off->getidoferta()?>>Editar Oferta</a>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php }?>
+        </div>
+        <div class="row text-center">
+        <nav aria-label="...">
+                <ul class="pagination">
+           
+                  <?php 
+                  if($pagina["anterior"]==$pagina["actual"]){
+                    echo("<li class='page-item disabled'>
+                            <a class='page-link' href='#' tabindex='-1'>Anterior</a>
+                            </li>");
+                            
+                }
+                  for($i=$pagina["anterior"];$i<=$pagina["siguiente"];$i++){
+                    $path = ROOT_PATH . "/ofertas/listarOfertas/" . $i;
+                        if($pagina["anterior"] == $i && $pagina["anterior"] != $pagina["actual"]){
+                            echo("<li class='page-item'>
+                                    <a class='page-link' href='$path' tabindex='-1'>Anterior</a>
+                                    </li>");
+                        }
+                     
+
+                    if($i == $pagina["actual"]){
+                        echo("<li class='page-item active'>
+                                <a class='page-link' href='$path'>$i<span class='sr-only'>(current)</span></a>
+                        </li>");
+                    }else{
+                     
+                     
+                       echo("<li class='page-item'><a class='page-link' href='$path'>$i</a></li>");
+                    }
+
+                  }
+                  
+                  $str =  $pagina['siguiente'] == $pagina['actual'] ? 'disabled' : '';
+                  echo( "<li class='page-item $str'>
+                        <a class='page-link' href='$path'>Siguiente</a>
+                      </li>");
+                  ?>
+                </ul>
+              </nav>
+            </div>
+    </div>
+
+    
+<script>
+$(document).ready(function() {
+    $('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
+    $('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
+});
+
+var ROOT_PATH = "<?php echo ROOT_PATH;?>";
+
+function removeOffer($id){
+$prompt = "Cuidado, estas seguro que deseas eliminar esta oferta!";
+$res = window.confirm($prompt);
+if($res){
+$.ajax({
+  type: "POST",
+  url: ROOT_PATH + "/ofertas/remove/",
+  data: {id:$id},
+  success: function(response){location.reload();}
+});
+}
+}
+
+</script>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<style>
+td{
+width:120px;
+text-align:center;
+height:40px;
+}
+td button{
+width:100%;
+height:100%;
+background-color:#333;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+td button:hover{
+background-color:#777;
+}
+
+td button[checked="true"]{
+background-color:red;
+}
+
+.table-container{
+width:75%;
+display:inline-block;
+}
+.table-menu{
+position:relative;
+width:20%;
+display:inline-block;
+top:-90px;
+}
+
+.container{
+width:100%;
+}
+
+</style>
+<script
+  src="../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="table-container">
+<table border="1" style="width:100%;" id="hour-container">
+<tr>
+<td><button class="dia" id="day1">LUNES</button></td>
+<td><button class="dia" id="day2">MARTES</button></td>
+<td><button class="dia" id="day3">MIERCOLES</button></td>
+<td><button class="dia" id="day4">JUEVES</button></td>
+<td><button class="dia" id="day5">VIERNES</button></td>
+<td><button class="dia" id="day6">SABADO</button></td>
+<td><button class="dia" id="day7">DOMINGO</button></td>
+</tr>
+
+<tr>
+<td><input type="time" class="hour1" ><br><label>A</label><br><input type="time" class="hour2"></td>
+<td><input type="time" class="hour1" ><br><label>A</label><br><input type="time" class="hour2"></td>
+<td><input type="time" class="hour1" ><br><label>A</label><br><input type="time" class="hour2"></td>
+<td><input type="time" class="hour1" ><br><label>A</label><br><input type="time" class="hour2"></td>
+<td><input type="time" class="hour1" ><br><label>A</label><br><input type="time" class="hour2"></td>
+<td><input type="time" class="hour1" ><br><label>A</label><br><input type="time" class="hour2"></td>
+<td><input type="time" class="hour1" ><br><label>A</label><br><input type="time" class="hour2"></td>
+</tr>
+</table>
+<table style="width:100%">
+<tr>
+<td colspan="8"><button id="addRow">AGREGAR</button></td>
+</tr>
+</table>
+</div>
+<div class="table-menu">
+<div>
+<label>
+   <input type="radio" name="group1" value="create" onchange="select_days(1)">
+   Lunes a Viernes
+</label>
+</div>
+<div>
+<label>
+   <input type="radio" name="group1" value="create" onchange="select_days(2)">
+  Sabados y Domingos
+</label>
+</div>
+
+<div><label><input type="radio" name="group1" onchange="select_days()">Eligir mis dias</label></div>
+</div>
+</div>
+<script>
+$(".dia").on("click",(e)=>{if(e.target.getAttribute("checked") === null){
+e.target.setAttribute("checked",true);
+}else{
+var b = e.target.getAttribute("checked");
+b = b === "true" ? true : false;
+b = !b;
+
+e.target.setAttribute("checked",b);
+}
+});
+
+$("#addRow").on("click",()=>{
+var data = "<tr>";
+for(var i=0;i<7;i++)
+data+="<td><input type='time'><br><label>A</label><br><input type='time'></td>";
+data+="<td><button onclick='remove_last_row()'>BORRAR</button></td>";
+data+="</tr>";
+$("#hour-container").append(data);
+})
+
+function remove_last_row(){
+var els = $("#hour-container").find("tr");
+els[els.length-1].remove();
+}
+
+function select_days(id){
+for(var i=1;i<=7;i++){
+document.getElementById("day"+i).setAttribute("checked","false");
+}
+switch(id){
+case 1:
+for(var i=1;i<=5;i++){
+document.getElementById("day"+i).setAttribute("checked","true");
+}
+break;
+case 2:
+for(var i=6;i<=7;i++){
+document.getElementById("day"+i).setAttribute("checked","true");
+}
+}
+}
+
+
+
+$(".hour1").on("change",(e)=>{
+var val = e.target.value;
+for(var i=1;i<=7;i++){
+var attr = document.getElementById("day"+i).getAttribute("checked");
+if(attr === null) continue;
+attr = attr === "true" ? true : false;
+if(attr){
+document.getElementsByClassName("hour1").item(i-1).value = val;
+}
+}
+})
+
+$(".hour2").on("change",(e)=>{
+var val = e.target.value;
+for(var i=1;i<=7;i++){
+var attr = document.getElementById("day"+i).getAttribute("checked");
+if(attr === null) continue;
+attr = attr === "true" ? true : false;
+if(attr){
+document.getElementsByClassName("hour2").item(i-1).value = val;
+}
+}
+
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+    <head>
+        <!-- 
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--		<link rel="stylesheet" href=<?php echo ROOT_PATH . "/bootstrap/css/bootstrap-combined.min.css"?>>
+-->
+		<link  type="text/css" href="<?php echo(ROOT_PATH . '/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet" />
+        <link  type="text/css" href="<?php echo(ROOT_PATH . '/bootstrap/css/bootstrap-formhelpers.min.css')?>" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo(ROOT_PATH .'/templates/footer.css')?>" />
+	   
+		
+		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo ROOT_PATH . '/templates/all.css'?>" />
+		
+		
+
+		<script type="text/javascript" src="<?php echo(ROOT_PATH .'/js/jquery-3.3.1.min.js')?>"></script>
+        <script type="text/javascript" src="<?php echo(ROOT_PATH .'/bootstrap/js/bootstrap.min.js')?>"></script>
+		<script type="text/javascript" src="<?php echo(ROOT_PATH .'/bootstrap/js/bootstrap-formhelpers-phone.js')?>"></script>
+ <title><?php echo $titulo ?></title>		
+  </head>
+ 
+  <body>
+    <header>
+        <nav class="navbar navbar-inverse navbar-nomargin">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="logo" href="<?php echo(ROOT_PATH . '/home/dashboard')?>">
+                        <img alt="logo" src="<?php echo(ROOT_PATH .'/beer.png')?>" class="img-responsive float-left img-inline" width="50" height="50" />
+						<span class="cerventum-logo">Cerventum</span>
+                    </a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+					<?php if(!isset($_SESSION["usuario"])){ ?>
+						<li id="registrarse"><a href="<?php echo(ROOT_PATH . '/registra/usuario')?>"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+						<li id="ingresar"><a href="<?php echo(ROOT_PATH . '/login')?>"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
+					<?php }else{ ?>
+
+					<li class="dropdown show" id="usuario">
+						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="linkUser" ><span class="glyphicon glyphicon <?php echo isset($_SESSION['cerveceria']) ? 'glyphicon-glass' : 'glyphicon-user'?>"></span> <?php if(isset($_SESSION["usuario"])){echo $_SESSION["usuario"];} if(isset($_SESSION["cerveceria"])){$cerv = $_SESSION["cerveceria"];
+						    echo " [".$cerv["nombre"]."]";
+						} ?> </a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<a class="dropdown-item" href="#">Mi Cuenta</a>
+							<a class="dropdown-item" href="#">Notificaciones</a>
+							<a class="dropdown-item" href="<?php echo(ROOT_PATH .'/logout')?>">Desconexion</a>
+						</div>
+					</li>					
+					<?php } ?>
+				</ul>
+            </div>
+        </nav>
+        
+		
+		<nav class="navbar navbar-black">
+            <div class="container-fluid">                
+                <ul class="nav navbar-nav">
+				   <?php echo $menu ?>	
+				</ul>
+            </div>
+        </nav>
+   
+    </header>
+<div class="content">

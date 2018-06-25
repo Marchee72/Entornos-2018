@@ -1,0 +1,30 @@
+
+<div class="container" style="position:relative;padding-bottom:18vh;">
+
+    <form method="post"  action=<?php echo ROOT_PATH . "/login/usuario" .  (isset($redirect) ? "?redirect=" . $redirect : "")?> class="col-xs-12">
+        <div class="col-md-4 col-md-offset-4">
+            <br>   
+            <div class="row white">
+            <h2 class="text-center">Ingresa</h2>
+            </div>
+             <div class="input-group <?php echo isset($error) ? " has-error":""; ?>">
+                <span class="input-group-addon" id="basic-addon1">Usuario</span>
+                <input type="text" name="usuario" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1">
+            </div>
+            <br>
+            <div class="input-group <?php echo isset($error) ? " has-error":""; ?>">
+                <span class="input-group-addon control-label" for="inputPass" id="basic-addon2">Contraseña</span>
+                <input type="password" name="pass" id="inputPass" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon2">
+			</div>
+			<?php if (isset($error)){?>
+            <div class="form-group has-error" style="margin-bottom:0px;">
+			<span class="help-block">Usuario y/o contraseña incorrectos</span>
+			</div>
+			<?php }?>
+            
+			<button id="log" name="log" type="submit" class="btn btn-primary left" style="margin-top:10px;">Iniciar sesion</button>
+            <p>No tienes una cuenta?<a href="<?php echo ROOT_PATH . '/registra/usuario'?>"> Registrate aqui</a></p>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,126 @@
+
+<div class="container-fluid" style="position:relative;">
+	<div class="col-xs-6 col-xs-offset-2">
+		<h1 style="color:white;">Registra tu cerveceria</h1>
+		<form class="col-xs-12" action=<?php echo ROOT_PATH . "/registra/cerveceria/doReg"?> method="post">
+
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Nombre</span>
+					<input type="text" name="nombre" class="form-control" placeholder="Nombre" aria-describedby="basic-addon1" required>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">Direccion</span>
+						<input type="text" name="direccion" class="form-control" placeholder="Direccion" aria-describedby="basic-addon1" required>
+						</div>
+						<div id="tel-container">
+							<div class="entry input-group">
+								<span class="input-group-addon" id="basic-addon1">Telefono</span>
+								<input type="text" name="telefono" class="form-control input-medium bfh-phone" data-format="(dddd) ddd-dddd" placeholder="Telefono" aria-describedby="basic-addon1" required>
+
+								</div>
+							</div>
+							<br />
+							<div class="contenedor-horarios" style="border:1px solid white; padding:10px;">
+								<label class="control-label white">Horarios</label>
+								<br />
+
+								<div class="dias">
+									<select id="inputState" name="dias[]" class="form-control" style="display:inline-block;width:75%;margin:10px 0px;">
+										<option value="1" selected>Lunes a Viernes</option>
+										<option value="2">Sabados y Domingos</option>
+										<option value="3">Todos los dias</option>
+									</select>
+									<button type="button"  class="btn btn-success btn-agregar-dias"> <span class="glyphicon glyphicon-plus"> </span></button>		          
+									<br />
+									<div class="input-group horarios"  style="width:75%;">
+										<span class="input-group-addon" id="basic-addon1">Desde: </span>
+										<input type="time" name="desde[]" class="form-control" style="width:100px;" aria-describedby="basic-addon1" required>
+											<span class="input-group-addon" id="basic-addon2">Hasta: </span>
+											<input type="time" name="hasta[]" class="form-control" style="width:100px;" aria-describedby="basic-addon2" required>
+
+												<span class="input-group-btn">
+													<button type="button"  class="btn btn-success btn-agregar-horarios"> <span class="glyphicon glyphicon-plus"> </span></button>		   
+												</span>
+											</div>
+											<input id="contador" name="count[]" type="hidden" value="1"></input>
+										</div>
+									</div>
+									<br />
+
+									<button type="submit" class="btn btn-primary">Guardar</button>
+
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+					<script>
+
+
+
+						$(function()
+						{
+						$(document).on('click', '.btn-agregar-dias', function(e)
+						{
+						e.preventDefault();
+
+						var contenedor = $('.contenedor-horarios'),
+						currentEntry = $(this).parents('.dias:first'),
+						newEntry = $(currentEntry.clone()).appendTo(contenedor);
+
+
+						//newEntry.find('input').val('');
+
+						contenedor.find('.dias:not(:first) .btn-agregar-dias')
+						.removeClass('btn-agregar-dias').addClass('btn-quitar-dias')
+						.removeClass('btn-success').addClass('btn-danger')
+						.html('<span class="glyphicon glyphicon-minus"></span>');
+
+
+						}).on('click', '.btn-quitar-dias', function(e)
+						{
+						$(this).parents('.dias:first').remove();
+
+						e.preventDefault();
+						return false;
+						})
+						});
+
+
+						$(function()
+						{
+						$(document).on('click', '.btn-agregar-horarios', function(e)
+						{
+						e.preventDefault();
+
+						var contenedor = $(this).parents('.dias'),
+						currentEntry = $(this).parents('.horarios'),
+						newEntry = $(currentEntry.clone()).appendTo(contenedor);
+
+						//  newEntry.find('input').val('');
+						var contador = contenedor.find("#contador");
+						var val = Number(contador.val());
+						contador.val(val+1);
+
+						contenedor.find('.horarios:not(:first) .btn-agregar-horarios')
+						.removeClass('btn-agregar-horarios').addClass('btn-quitar-horarios')
+						.removeClass('btn-success').addClass('btn-danger')
+						.html('<span class="glyphicon glyphicon-minus"></span>');
+						}).on('click', '.btn-quitar-horarios', function(e)
+						{
+						var cont = $(this).parents('.dias');
+						var contador = cont.find("#contador");
+						var val = Number(contador.val());
+						contador.val(val-1);
+						$(this).parents('.horarios:first').remove();
+						
+						e.preventDefault();
+						return false;
+						})
+						});
+
+
+
+					</script>

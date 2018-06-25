@@ -1,0 +1,51 @@
+
+<div class="container-fluid" style="position:relative;">
+
+    <form  class="needs-validation col-xs-6" method="post" action=<?php echo ROOT_PATH . "/ofertas/update/"?>>
+    
+    <div>
+    <div style="display: inline-block;background: white;width:205px;height:169px;">    
+    <img id="img-oferta" style="display: block;width:100%;" src=<?php echo $oferta->getImg()?> height="150px" alt=<?php echo $data[0]->getdesctipo()?>>
+    <select name="oferta-sel" class="selectpicker" id="select-ofertas" style="width:100%;" data-style="btn-primary">
+        <?php    
+        foreach($data as $off) { ?>
+                
+                <option <?php echo $off->getid() == $oferta->getid() ? "selected" : "" ?> value=<?php echo $off->getid() ?>><?php echo $off->getdesctipo() ?></option>
+            
+            
+            <?php } ?>
+           
+          </select> 
+    </div>
+    
+    </div>
+    <br />
+    <div class="form-group shadow-textarea">
+            <div class="input-group">
+                    <span class="input-group white" id="basic-addon1">Titulo Oferta</span>
+                    <input type="text" name="titulo" class="form-control" value="<?php echo $oferta->gettitulo(); ?>" placeholder="Titulo" aria-describedby="basic-addon1">
+                </div>
+                <label class="white" for="txt">Descripcion</label>
+                <textarea name="long-desc" class="form-control z-depth-1" id="txt" rows="4" placeholder="Agrega una descripcion a la oferta"><?php echo $oferta->getdesc(); ?></textarea>
+            </div>
+            <div class="input-group horarios"  style="width:75%;">
+                    <span class="input-group-addon" id="basic-addon1">Desde: </span>
+                    <input type="datetime-local" value="<?php echo $oferta->getfecha_desde_parsed_t(); ?>" name="desde" class="form-control" style="width:200px;" aria-describedby="basic-addon1" required>
+                        <span class="input-group-addon" id="basic-addon2">Hasta: </span>
+                        <input type="datetime-local" value="<?php echo $oferta->getfecha_hasta_parsed_t(); ?>" name="hasta" class="form-control" style="width:200px;" aria-describedby="basic-addon2" required>
+                        <input type="hidden" value="<?php echo $oferta->getidoferta(); ?>" name="id-oferta">
+                           
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+    </div>
+    
+    <script type="text/javascript">
+    $ofertas = <?php echo json_encode($data);?>;
+    $path =  <?php echo sprintf('"%s"', ROOT_PATH); ?> ;
+    
+    $("#select-ofertas").on("change",function(e){
+     $("#img-oferta").attr("src",$path+"/"+$ofertas[e.currentTarget.value-1].data.img_path)
+    })
+    </script>

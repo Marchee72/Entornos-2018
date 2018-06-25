@@ -1,0 +1,93 @@
+<div class="container-fluid" style="position:relative;padding-bottom:18vh;">
+
+		<?php 
+		
+		if(isset($result)){
+		
+		switch($result){
+			case 1:
+				echo ("<div class='alert alert-success' role='alert'>
+						<h4 class='alert-heading'><strong>Exito!</strong></h4>
+						El Usuario fue registrado, valide su cuenta a traves del link que le enviamos por mail.
+					</div>
+				</div>");
+			break;
+			case 0:
+				echo("<div>
+					<div class='alert alert-danger' role='alert'>
+						<h4 class='alert-heading'><strong>Error!</strong></h4>
+						El nombre de usuario ya fue seleccionado, ingrese uno distinto.
+					</div>
+				  </div>");
+			}
+		}else{
+		?>		
+	
+
+	<div align="center">
+            <h1 style="color:white" class="display-1">Registrate!</h1>
+            <p style="color: lightgrey">Es gratis.</p>
+    </div>
+    <form method="post"  action=<?php echo ROOT_PATH . "/registra/usuario/doReg"?> class="needs-validation col-xs-12" >
+        <div class="col-md-4 col-md-offset-4">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Nombre</span>
+                <input type="text" name="nombre" value="<?php if(isset($pre["nombre"])) echo $pre["nombre"]; ?>" class="form-control" placeholder="Nombre" aria-describedby="basic-addon1" required>
+            </div>
+			<br />
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon2">Apellido</span>
+                <input type="text" name="apellido" value="<?php if(isset($pre["apellido"])) echo $pre["apellido"]; ?>" class="form-control" placeholder="Apellido" aria-describedby="basic-addon2" required>
+            </div>
+						<br />
+
+            <div class="input-group <?php if (isset($error)) echo ($error == 2 || $error == 3) ? " has-error":""; ?>">
+                <span class="input-group-addon" id="basic-addon3">@</span>
+                <input type="text" name="email" value="<?php if(isset($pre["email"])) echo $pre["email"]; ?>" class="form-control" placeholder="Email" aria-describedby="basic-addon3" required>
+            </div>
+			<?php if (isset($error)){
+				if($error==2 || $error==3){
+			?>
+            <div class="form-group has-error" style="margin-bottom:0px;">
+			<span class="help-block">El email ya esta en uso</span>
+			</div>
+			<?php 
+			}else{
+			echo "<br />";
+			}
+			}else{
+			echo "<br />";
+			}
+			?>
+			 <div class="input-group <?php if (isset($error)) echo ($error == 2 || $error == 1) ? " has-error":""; ?>">
+                <span class="input-group-addon" id="basic-addon4">Usuario</span>
+                <input type="text" name="usuario" value="<?php if(isset($pre["usuario"])) echo $pre["usuario"]; ?>" class="form-control" placeholder="Usuario" aria-describedby="basic-addon4" required>
+            </div>
+				<?php if (isset($error)){
+				if($error==2 || $error==1){
+			?>
+            <div class="form-group has-error" style="margin-bottom:0px;">
+			<span class="help-block">El usuario ya esta en uso</span>
+			</div>
+			<?php 
+			}else{
+			echo "<br />";
+			}
+			}else{
+			echo "<br />";
+			}
+			?>
+           
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon5">Contraseña</span>
+                <input type="password" name="pass" value="<?php if(isset($pre["pass"])) echo $pre["pass"]; ?>" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon5" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Crear cuenta</button>
+        </div>
+    </form>
+</div>
+
+
+
+<?php }?>

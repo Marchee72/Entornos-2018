@@ -1,0 +1,28 @@
+.footer{
+  
+  padding: 1rem;
+  background-color: #222;  
+  text-align: center;
+  color:white;
+  height: 80px;
+}
+
+.content{
+  min-height: calc(100vh - 80px);
+}
+
+@media (max-width: 768px){
+.footer {
+    position:relative;
+}
+}
+
+
+.footer-line li{
+	display:inline;
+	text-decoration:none;
+}
+.footer-line li a{
+	color:white;
+	text-decoration:underline;
+}
