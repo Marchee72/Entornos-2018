@@ -16,17 +16,16 @@
         
 		}
 		
-		function usuario(){
+		function usuario($hash = null){			if($hash == null){
 			$usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : die;
             $pass = isset($_POST["pass"]) ? $_POST["pass"] : die;
-			$datos = model::login($usuario,$pass);
+			$datos = model::login($usuario,$pass);			}else{			if(strlen($hash) < 32) return;			$datos = model::loginwithhash($hash);				}
 			
 			if($datos != null){
 				
 				 $_SESSION["usuario"] = $datos["usuario"];
 				$_SESSION["user_id"] = $datos["id"];
 				$_SESSION["email"] = $datos["email"];
-				//$this->setPermisos($vUsuario["tipo"]);  
 				if($datos["valido"]==1){
 				$_SESSION["tipo_usuario"] = $datos["nombretipo"];
 					if($datos["nombretipo"]=="OWNER"){

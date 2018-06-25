@@ -12,7 +12,6 @@ $headers = "From: Un usuario tiene una consulta <$email>\r\n";
 
 #implementar mail de contacto cualquiera
 //mail("Cerventum@contacto.com","CONSULTA",$consulta);	
-
-
-}
+
+}}
 ?>
