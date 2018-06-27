@@ -6,6 +6,21 @@ class admin{
 		
 
 	}
+	
+	function borrar_usuarios(){
+		if(isset($_SESSION["lista_usuarios"])){
+		$seleccion = $_POST["user_selected"];
+		$usuarios = $_SESSION["lista_usuarios"];
+		//eliminamos los usuarios seleccionados de la db
+		foreach($seleccion as $index){
+			$usu = $usuarios[$index];
+			model::removeusu($usu);
+		}
+		}
+		$pagina = isset($_SESSION["pagina"]) ? $_SESSION["pagina"] : 1;
+		header("Location:".ROOT_PATH."/admin/listarusuarios/" . $pagina);	
+	}
+	
 
 	function listarusuarios($pagina = null){
 		
@@ -15,7 +30,9 @@ class admin{
 
 		$numeroPaginas = ceil($cantidadusuarios/$cantidadPorPagina);
 
-
+		if($pagina > $numeroPaginas){
+				header("Location:".ROOT_PATH."/admin/listarusuarios/" . $numeroPaginas);	
+		}
 
 		$vars = array();
 
@@ -51,8 +68,14 @@ class admin{
 			$vars["usuarios"] = $data;
 
 			echo $this->view->render("templates/admin/listausu.html",$vars);
-		
-		
+			$user_ids = array();
+			$i = 0;
+			foreach($data as $usu){
+				$user_ids[$i] = $usu->getid();
+				$i++;
+			}
+			$_SESSION["lista_usuarios"] = $user_ids;
+			$_SESSION["pagina"] = $pActual;
 	}
 	
 }
