@@ -21,6 +21,14 @@ require("models/abstractModel.php");
 			return $res["cantidad"];
 	 }
 	 
+	 static function removeusu($id){
+		$conn = connect();
+		if(!$conn)
+			return 0;
+		$sql = "delete from usuarios where id='$id'";
+		$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
+	 }
+	 
 	 static function getusuarios($desde,$hasta,$str = null){
 
 		$conn = connect();
@@ -33,11 +41,11 @@ require("models/abstractModel.php");
 
 		if($str == null)
 
-		$sql = "select u.nombre,u.telefono,u.apellido,u.usuario,u.email,u.valido,u.tipo,t.nombre tipo_usu from usuarios u inner join tipo_usuario t on t.id = u.tipo limit $desde,$hasta;";	
+		$sql = "select u.id,u.nombre,u.apellido,u.usuario,u.email,u.valido,u.tipo,t.nombre tipo_usu from usuarios u inner join tipo_usuario t on t.id = u.tipo limit $desde,$hasta;";	
 
 		else
 
-		$sql = "select u.nombre,u.telefono,u.apellido,u.usuario,u.email,u.valido,u.tipo,t.nombre tipo_usu from usuarios u inner join tipo_usuario t on t.id = u.tipo where u.usuario like '%$str%' or u.nombre like '%$str%' or u.email like '%$str%' limit $desde,$hasta;";	
+		$sql = "select u.id,u.nombre,u.apellido,u.usuario,u.email,u.valido,u.tipo,t.nombre tipo_usu from usuarios u inner join tipo_usuario t on t.id = u.tipo where u.usuario like '%$str%' or u.nombre like '%$str%' or u.email like '%$str%' limit $desde,$hasta;";	
 	
 
 		$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
@@ -95,5 +103,9 @@ $this->data = $data;
 		}
 		function gettipo(){
 			return $this->data["tipo_usu"];
+		}
+		
+		function getid(){
+			return $this->data["id"];
 		}
 }
