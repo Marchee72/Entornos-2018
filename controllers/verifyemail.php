@@ -18,14 +18,10 @@ class verifyemail{
     }
     	function terminaRegistro($hash){
 		$vars = Array();
-		$res = model::validar($hash);	
-		if(is_array($res)){
-
-		}else{
-		session_destroy();	    header("Location:".ROOT_PATH."/login/usuario/".$hash);
+		$res = model::validar($hash);				header("Location:".ROOT_PATH."/login/usuario/");
 		}
-		//echo "Registro finalizado, logueate";
+	
 
-	}
+	
 }
 ?>

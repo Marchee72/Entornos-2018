@@ -70,8 +70,8 @@
 
 			model::updatetipousuario($user_id,"OWNER");	
 
+		
 			$_SESSION["tipo_usuario"] = "OWNER";
-
 				
 
 		$c = 0;
@@ -99,22 +99,8 @@
 			}
 
 		}
-
 		
-
-		echo ("<div class='centered' style='width: 50%; margin: auto;' >
-				
-				<div class='alert alert-success centered' role='alert'>
-
-						<h4 class='alert-heading'><strong>Exito!</strong></h4>
-
-						La cerveceria $nombre ha sido registrada exitosamente!!<br />
-
-					</div>
-
-				</div>
-
-			</div>");
+		header("Location:".ROOT_PATH."/login/cerveceria");
 
 			}
 
@@ -198,10 +184,10 @@
 
 	$pass = isset($_POST["pass"]) ? $_POST["pass"] : die;
 
-	
+		
 
 	$random_hash = md5(uniqid(rand(), true));
-
+	    
 	
 
 	$reg = model::registrarNuevoUsuario($nombre,$apellido,$usuario,$email,$pass,$random_hash);
@@ -229,10 +215,12 @@
 			$vars["result"] = $reg;
 
 		}
-
 		
-
+		$_SESSION["login_token"] = $random_hash;
+		
 		utils::enviarMailValidacion($email,$random_hash);
+		
+		header("Location:".ROOT_PATH."/login/usuario/");
 
 	}
 

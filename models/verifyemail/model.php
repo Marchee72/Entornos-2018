@@ -36,19 +36,19 @@ static function validar($hash){
 			//no se encontro esa hash
 			mysqli_close($conn);
 			return 0;
-		}else{		/*
+		}else{		
 		$id = $datos["id"];
 		$sql = "UPDATE usuarios SET valido=1 WHERE id = $id";
 		$resultado = mysqli_query($conn, $sql);
 			if(!$resultado)
 			mysqli_close($conn);
 				return mysqli_error_list($conn);	
-		}		*/
+		}		
 		mysqli_close($conn);
 		return 1;
 	}
 
-}}
+}
 
 
 ?>
