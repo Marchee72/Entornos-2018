@@ -17,7 +17,8 @@ require("models/abstractModel.php");
 			$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
 
 			$res = mysqli_fetch_assoc($resultado);
-
+				mysqli_close($conn);
+	
 			return $res["cantidad"];
 	 }
 	 
@@ -27,14 +28,17 @@ require("models/abstractModel.php");
 			return 0;
 		$sql = "delete from usuarios where id='$id'";
 		$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
-	 }
+		mysqli_close($conn);
+		
+	}
 
-	 static function getusu($id){
+	 static function modiusu($id,$nombre,$apellido,$tipo_usu,$valido){
 		$conn = connect();
 		if(!$conn)
 			return 0;
-		$sql = "select * from usuarios where id='$id'";
+		$sql = "update usuarios set nombre='$nombre', apellido='$apellido',tipo='$tipo_usu',valido='$valido' where id='$id'";
 		$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
+		mysqli_close($conn);
 		return mysqli_fetch_assoc($resultado);
 	 }
 	 

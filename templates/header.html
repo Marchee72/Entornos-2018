@@ -41,7 +41,7 @@
 					<?php }else{ ?>
 
 					<li class="dropdown show" id="usuario">
-						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="linkUser" ><span class="glyphicon glyphicon <?php echo isset($_SESSION['cerveceria']) ? 'glyphicon-glass' : 'glyphicon-user'?>"></span> <?php if(isset($_SESSION["usuario"])){echo $_SESSION["usuario"];} if(isset($_SESSION["cerveceria"])){$cerv = $_SESSION["cerveceria"];
+						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="linkUser" ><span class="glyphicon glyphicon <?php echo isset($_SESSION['cerveceria']) ? 'glyphicon-glass' : (isset($_SESSION['tipo_usuario']) ? ($_SESSION['tipo_usuario']=='ADMIN' ? 'glyphicon-wrench' : 'glyphicon-user') : 'glyphicon-user')?>"></span> <?php if(isset($_SESSION["usuario"])){echo isset($_SESSION["tipo_usuario"]) ? ($_SESSION["tipo_usuario"]=="ADMIN" ? "[ADMIN] " . $_SESSION["usuario"] : $_SESSION["usuario"]) : $_SESSION["usuario"] ;} if(isset($_SESSION["cerveceria"])){$cerv = $_SESSION["cerveceria"];
 						    echo " [".$cerv["nombre"]."]";
 						} ?> </a>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

@@ -146,34 +146,48 @@
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
       <div class="modal-dialog">
     <div class="modal-content">
+	<form id="frm-modi" action="<?php echo ROOT_PATH . '/admin/modificarusuario'?>" method="post">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Editar</h4>
+        <h4 class="modal-title custom_align" id="Heading">Editar Usuario</h4>
       </div>
           <div class="modal-body">
           <div class="form-group">
-        <label for="usu">Usuario: </label>
-        <input id="usu" class="form-control " type="text">
+        
+        <input id="nombre" placeholder="Nombre" name="nombre" class="form-control " type="text">
         </div>
         <div class="form-group">
         
-        <input class="form-control " type="text" placeholder="Nombre">
+        <input class="form-control" name="apellido" id="apellido" type="text" placeholder="Apellido">
         </div>
         <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="<?php echo $usu->getnombre() ?>"></textarea>
-    
-        
+		<label for="valido">Valido</label> 
+        <select class="selectpicker" name="valido" id="valido">
+			<option>0</option>
+			<option>1</option>
+		</select>
+        <div class="form-group">
+		<label for="tipo_usu">Tipo Usuario</label> 
+        <select class="selectpicker" name="tipo_usu" id="tipo_usu">
+			<option value="1">ADMIN</option>
+			<option value="2">USER</option>
+			<option value="3" disabled>OWNER</option>
+		</select>
         </div>
+		 </div>
       </div>
+	  <input type="hidden" name="userSelected" id="userSelected">
+	   
           <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-      </div>
+        <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Guardar</button>
+      </form>
+	  </div>
         </div>
-    <!-- /.modal-content --> 
-  </div>
-      <!-- /.modal-dialog --> 
-    </div>
     
+  </div>
+     
+    </div>
+	
     <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -264,24 +278,39 @@ $("#boton_borrarsel").css("visibility","unset");
 	$(this).parent().parent().siblings().find(".checkthis").prop("checked",true); 
 	$(".count-sel").each(function(){$(this).text(1)});
 	 $(".count-sel").trigger("text_change");
+		selectedUserIndex = $(this).parent().parent().siblings().find(".checkthis").val();
 
-  get_user_data();  
-	});
-function get_user_data(){
-  // $("#frm-usu").attr("action","<?php echo ROOT_PATH . '/admin/obtener_usuario'?>");
-  // data = $("#frm-usu").submit();
-  // $("#usu").val(data.usuario);
+$("#tipo_usu").prop("disabled",false);
 
-$.ajax({
-    type: "POST",
-    url: "<?php echo ROOT_PATH . '/admin/obtener_usuario'?>",
-    dataType: 'json',
-    success: function (response) {
-                    $("#usu").val(response);
-            }
+		
+$("#tipo_usu").find("option").each(function(){
+if($(this).text() == usuarios[selectedUserIndex].data.tipo_usu){
+$(this).prop("selected",true);
+if($(this).text() == "OWNER"){
+$("#tipo_usu").prop("disabled",true);
+}
+}
 })
-
-};
+	
+$("#valido").find("option").each(function(){
+if($(this).text() == usuarios[selectedUserIndex].data.valido){
+$(this).prop("selected",true);
+}
+});	
+	
+$("#nombre").val(usuarios[selectedUserIndex].data.nombre);
+$("#apellido").val(usuarios[selectedUserIndex].data.apellido);
+$("#userSelected").val(selectedUserIndex);	
+});
+	
+	function guardar_edicion(){
+		$("#frm-usu").attr("action","<?php echo ROOT_PATH . '/admin/borrar_usuarios'?>");
+		$("#frm-usu").submit();
+	}
+	
+//cargar usuarios
+var selectedUserIndex = -1;	
+var usuarios = <?php echo json_encode($usuarios) ?>
 
 
 

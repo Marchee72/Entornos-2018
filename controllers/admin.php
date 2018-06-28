@@ -20,24 +20,21 @@ class admin{
 		$pagina = isset($_SESSION["pagina"]) ? $_SESSION["pagina"] : 1;
 		header("Location:".ROOT_PATH."/admin/listarusuarios/" . $pagina);	
 	}
-
-	function obtener_usuario(){
+	
+	function modificarusuario(){
 		if(isset($_SESSION["lista_usuarios"])){
-		$seleccion = $_POST["user_selected"];
 		$usuarios = $_SESSION["lista_usuarios"];
-		//eliminamos los usuarios seleccionados de la db
-		foreach($seleccion as $index){
-			$usu = $usuarios[$index];
-			$data = model::getusu($usu);
+		$selectedIndex = $_POST["userSelected"];
+		$userID = $usuarios[$selectedIndex];
+		$nombre = $_POST["nombre"];
+		$apellido = $_POST["apellido"];
+		$valido = $_POST["valido"];
+		$tipo = isset($_POST["tipo_usu"]) ? $_POST["tipo_usu"] : 3;
+		model::modiusu($userID,$nombre,$apellido,$tipo,$valido);
 		}
-		}
-
-		return json_encode($data);
-		// $pagina = isset($_SESSION["pagina"]) ? $_SESSION["pagina"] : 1;
-		// header("Location:".ROOT_PATH."/admin/listarusuarios/" . $pagina);	
+		$pagina = isset($_SESSION["pagina"]) ? $_SESSION["pagina"] : 1;
+		header("Location:".ROOT_PATH."/admin/listarusuarios/" . $pagina);
 	}
-
-
 	
 
 	function listarusuarios($pagina = null){
