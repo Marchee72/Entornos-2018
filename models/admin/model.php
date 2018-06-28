@@ -33,6 +33,8 @@ require("models/abstractModel.php");
 	}
 
 	 static function modiusu($id,$nombre,$apellido,$tipo_usu,$valido){
+		 if(strlen($nombre)>20) $nombre = substr($nombre,0,20);
+		 if(strlen($apellido)>20) $apellido = substr($apellido,0,20);
 		$conn = connect();
 		if(!$conn)
 			return 0;
