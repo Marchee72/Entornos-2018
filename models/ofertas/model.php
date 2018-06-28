@@ -20,14 +20,13 @@ require("models/abstractModel.php");
 
 		if($str == null)
 
-		$sql = "select o.id,o.titulo,o.fecha_desde,o.fecha_hasta,o.descripcion,desc_tipo,img_path from ofertas o inner join tipo_oferta on tipo_oferta.id_tipo = o.tipo_id limit $desde,$hasta;";	
+		$sql = "select o.id,o.titulo,o.fecha_desde,o.fecha_hasta,o.descripcion,desc_tipo,img_path,c.nombre from ofertas o inner join tipo_oferta on tipo_oferta.id_tipo = o.tipo_id inner join cerveceria c on c.id = o.cerveceria_id limit $desde,$hasta;";	
 
 		else
 
-		$sql = "select o.id,o.titulo,o.fecha_desde,o.fecha_hasta,o.descripcion,desc_tipo,img_path from ofertas o inner join tipo_oferta on tipo_oferta.id_tipo = o.tipo_id where o.titulo like '%$str%' or o.descripcion like '%$str%' limit $desde,$hasta;";	
+		$sql = "select o.id,o.titulo,o.fecha_desde,o.fecha_hasta,o.descripcion,desc_tipo,img_path,c.nombre from ofertas o inner join tipo_oferta on tipo_oferta.id_tipo = o.tipo_id inner join cerveceria c on c.id = o.cerveceria_id where o.titulo like '%$str%' or o.descripcion like '%$str%' limit $desde,$hasta;";	
 
 	
-
 		$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
 
 		$rows = Array();	
