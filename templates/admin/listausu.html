@@ -152,14 +152,15 @@
       </div>
           <div class="modal-body">
           <div class="form-group">
-        <input class="form-control " type="text" placeholder="Mohsin">
+        <label for="usu">Usuario: </label>
+        <input id="usu" class="form-control " type="text">
         </div>
         <div class="form-group">
         
-        <input class="form-control " type="text" placeholder="Irshad">
+        <input class="form-control " type="text" placeholder="Nombre">
         </div>
         <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+        <textarea rows="2" class="form-control" placeholder="<?php echo $usu->getnombre() ?>"></textarea>
     
         
         </div>
@@ -247,12 +248,43 @@ $("#boton_borrarsel").css("visibility","unset");
 	 $(".count-sel").trigger("text_change");  
 	});
 	
-	
 	function confirm_remove(){
 			$("#frm-usu").attr("action","<?php echo ROOT_PATH . '/admin/borrar_usuarios'?>");
 			$("#frm-usu").submit();
 		}	
 	
+
+  //acciones boton editar
+  $(".btn-edit").click(function(evt){
+	evt.preventDefault();
+	$("input[type=checkbox]").each(function(){
+	$(this).prop("checked",false);	
+	});
+	//obtener el checkbox de esa linea
+	$(this).parent().parent().siblings().find(".checkthis").prop("checked",true); 
+	$(".count-sel").each(function(){$(this).text(1)});
+	 $(".count-sel").trigger("text_change");
+
+  get_user_data();  
+	});
+function get_user_data(){
+  // $("#frm-usu").attr("action","<?php echo ROOT_PATH . '/admin/obtener_usuario'?>");
+  // data = $("#frm-usu").submit();
+  // $("#usu").val(data.usuario);
+
+$.ajax({
+    type: "POST",
+    url: "<?php echo ROOT_PATH . '/admin/obtener_usuario'?>",
+    dataType: 'json',
+    success: function (response) {
+                    $("#usu").val(response);
+            }
+})
+
+};
+
+
+
 	</script>
     
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">

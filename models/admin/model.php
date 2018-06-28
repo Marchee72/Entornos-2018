@@ -28,7 +28,18 @@ require("models/abstractModel.php");
 		$sql = "delete from usuarios where id='$id'";
 		$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
 	 }
+
+	 static function getusu($id){
+		$conn = connect();
+		if(!$conn)
+			return 0;
+		$sql = "select * from usuarios where id='$id'";
+		$resultado = mysqli_query($conn, $sql) or die (mysqli_error($conn));
+		return mysqli_fetch_assoc($resultado);
+	 }
 	 
+
+
 	 static function getusuarios($desde,$hasta,$str = null){
 
 		$conn = connect();

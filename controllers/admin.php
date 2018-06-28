@@ -20,6 +20,24 @@ class admin{
 		$pagina = isset($_SESSION["pagina"]) ? $_SESSION["pagina"] : 1;
 		header("Location:".ROOT_PATH."/admin/listarusuarios/" . $pagina);	
 	}
+
+	function obtener_usuario(){
+		if(isset($_SESSION["lista_usuarios"])){
+		$seleccion = $_POST["user_selected"];
+		$usuarios = $_SESSION["lista_usuarios"];
+		//eliminamos los usuarios seleccionados de la db
+		foreach($seleccion as $index){
+			$usu = $usuarios[$index];
+			$data = model::getusu($usu);
+		}
+		}
+
+		return json_encode($data);
+		// $pagina = isset($_SESSION["pagina"]) ? $_SESSION["pagina"] : 1;
+		// header("Location:".ROOT_PATH."/admin/listarusuarios/" . $pagina);	
+	}
+
+
 	
 
 	function listarusuarios($pagina = null){
