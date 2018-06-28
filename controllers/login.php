@@ -14,12 +14,12 @@
 			}
 			echo $this->view->render("templates/login.html",$vars); 
         
-		}
+		}				function cerveceria(){			if(isset($_SESSION["user_id"])){				if(!isset($_SESSION["cerveceria"])){				if($_SESSION["tipo_usuario"]=="OWNER"){					$cerv = model::buscarCerveceria($_SESSION["user_id"]);					$_SESSION["cerveceria"] = $cerv;				}			}			}						header("Location:".ROOT_PATH."/home/dashboard");		}
 		
-		function usuario($hash = null){			if($hash == null){
-			$usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : die;
-            $pass = isset($_POST["pass"]) ? $_POST["pass"] : die;
-			$datos = model::login($usuario,$pass);			}else{			if(strlen($hash) < 32) return;			$datos = model::loginwithhash($hash);				}
+		function usuario(){			if(!isset($_SESSION["login_token"])){
+			$usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : die;
+            $pass = isset($_POST["pass"]) ? $_POST["pass"] : die;
+			$datos = model::login($usuario,$pass);			}else{			$datos = model::loginwithhash($_SESSION["login_token"]);				}
 			
 			if($datos != null){
 				
@@ -37,7 +37,7 @@
 				}else{
 					header("Location:".ROOT_PATH."/home/dashboard");
 				}
-			}else{
+			}else{				$_SESSION["login_token"] = $datos["hash_validacion"];
 				header("Location:".ROOT_PATH."/verifyemail");
 			}
 				
