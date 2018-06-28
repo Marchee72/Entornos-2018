@@ -58,6 +58,6 @@ function editarDatos(){
 		
 	
 }
-
+function listar(){	echo $this->view->render("templates/enconstruccion/enconstruccion.php");}
 }
 ?>

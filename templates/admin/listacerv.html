@@ -1,0 +1,333 @@
+<div class="row-fluid">
+		
+       <h1 align="center" style="color: white">Cervecerias</h1>
+       <br> 
+<div class="container" style="position:relative;padding-bottom:18vh;">
+        <form id="frm-cerv" action="#" class="col-md-12" method="post" style="background:white;border-radius:15px;padding-top:10px;">
+        <div class="table-responsive"  style="overflow-x:hidden;">
+
+                
+              <table id="mytable" class="table table-bordred table-striped">
+                   
+                   <thead>
+                   
+                   <th><input type="checkbox" id="checkall" /></th>
+                   <th>Nombre</th>
+                    <th>Direccion</th>
+                     <th>Telefono</th>
+                      <th>Editar</th>
+                      <th>Borrar</th>
+                   </thead>
+    <tbody>
+     <?php 
+	 $index = 0;
+	 foreach($cervecerias as $cerv){
+
+                   
+
+                ?>
+    <tr>
+    <td><input type="checkbox" class="checkthis" name="user_selected[]" value="<?php echo $index ?>"/></td>
+    <td><?php echo $cerv->getnombre() ?></td>
+    <td><?php echo $cerv->getdireccion() ?></td>
+    <td><?php echo $cerv->gettelefono() ?></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Editar"><button class="btn btn-primary btn-xs btn-edit" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Borrar"><button class="btn btn-danger btn-xs btn-delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+    </tr>
+    
+    <?php 
+	$index++;
+	}?>
+   
+    
+   
+    
+    </tbody>
+        
+</table>
+		<div class="row text-center" id="boton_borrarsel" style="visibility:hidden;">
+		
+		<p data-placement="top" data-toggle="tooltip" title="Eliminar seleccion"><button data-target="#delete_multiple" class="btn btn-danger btn-xs" id="eliminar_selecc" data-title="Eliminar" data-toggle="modal">
+		<span>Eliminar seleccionados</span>
+		<span class="glyphicon glyphicon-trash"></span><span class="count-sel">0</span></button></p>
+		</div>
+        <div class="row text-center">
+
+        <nav aria-label="...">
+
+                <ul class="pagination">
+
+           
+
+                  <?php 
+
+                  if($pagina["anterior"]==$pagina["actual"]){
+
+                    echo("<li class='page-item disabled'>
+
+                            <a class='page-link' href='#' tabindex='-1'>Anterior</a>
+
+                            </li>");
+
+                            
+
+                }
+
+                  for($i=$pagina["anterior"];$i<=$pagina["siguiente"];$i++){
+
+                    $path = ROOT_PATH . "/admin/listarcervecerias/" . $i;
+
+                        if($pagina["anterior"] == $i && $pagina["anterior"] != $pagina["actual"]){
+
+                            echo("<li class='page-item'>
+
+                                    <a class='page-link' href='$path' tabindex='-1'>Anterior</a>
+
+                                    </li>");
+
+                        }
+
+                     
+
+
+
+                    if($i == $pagina["actual"]){
+
+                        echo("<li class='page-item active'>
+
+                                <a class='page-link' href='$path'>$i<span class='sr-only'>(current)</span></a>
+
+                        </li>");
+
+                    }else{
+
+                     
+
+                     
+
+                       echo("<li class='page-item'><a class='page-link' href='$path'>$i</a></li>");
+
+                    }
+
+
+
+                  }
+
+                  
+
+                  $str =  $pagina['siguiente'] == $pagina['actual'] ? 'disabled' : '';
+
+                  echo( "<li class='page-item $str'>
+
+                        <a class='page-link' href='$path'>Siguiente</a>
+
+                      </li>");
+
+                  ?>
+
+                </ul>
+
+              </nav>
+
+            </div>
+
+                
+            </div>
+            
+        </form>
+	</div>
+</div>
+
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+	<form id="frm-modi" action="<?php echo ROOT_PATH . '/admin/modificarcerveceria'?>" method="post">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Editar Cerveceria</h4>
+      </div>
+          <div class="modal-body">
+          <div class="form-group">
+        
+        <input id="nombre" placeholder="Nombre" name="nombre" class="form-control" maxlength="20" type="text">
+        </div>
+        <div class="form-group">
+        
+        <input class="form-control" name="direccion" id="direccion" type="text" maxlength="20" placeholder="Direccion">
+        </div>
+		
+		<div class="form-group">
+        
+        <input class="form-control input-medium bfh-phone" data-format="(dddd) ddd-dddd" name="telefono" id="telefono" type="text"  placeholder="Telefono">
+        </div>
+        
+      </div>
+	  <input type="hidden" name="userSelected" id="userSelected">
+	   
+          <div class="modal-footer ">
+        <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Guardar</button>
+      </form>
+	  </div>
+        </div>
+    
+  </div>
+     
+    </div>
+	
+    <script type="text/javascript">
+	$(document).ready(function(){
+
+	$(".count-sel").on("text_change",function(){
+	
+$(".count-sel").each(function(){
+if($(this).text() == "0"){
+$("#boton_borrarsel").css("visibility","hidden");
+}else{
+$("#boton_borrarsel").css("visibility","unset");
+}
+});
+});
+
+	$("#mytable #checkall").click(function () {
+
+       if ($("#mytable #checkall").is(':checked')) {
+			var count = -1;
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+				count++;
+            });
+			 $(".count-sel").each(function(){$(this).text(count)});
+
+        } else {
+			
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+			});
+			 $(".count-sel").each(function(){$(this).text(0)});
+        }
+ $(".count-sel").trigger("text_change");  
+  });
+    
+    $("[data-toggle=tooltip]").tooltip();
+
+	$(".checkthis").on("change",function() {
+	var checked = $(this).prop("checked");
+	 $(".count-sel").each(function(){
+		$(this).text(checked ? Number($(this).text()) + 1 : Math.max(Number($(this).text()) - 1,0))
+	 });
+//               $(".count-sel").text($(this).prop("checked") ?  Number($(".count-sel").text()) + 1 : Math.max(Number($(".count-sel").text()) - 1,0));
+            $(".count-sel").trigger("text_change");
+			});
+			
+			
+	});
+
+	function remove_selected(){
+		var query = $("#frm-usu :input").serialize();
+		
+	}
+	
+	$("#eliminar_selecc").click(function(evt){
+	evt.preventDefault();
+	})
+	
+	$(".btn-edit").click(function(evt){
+	evt.preventDefault();
+	
+	})
+	
+	//acciones boton borrar individual
+	$(".btn-delete").click(function(evt){
+	evt.preventDefault();
+	$("input[type=checkbox]").each(function(){
+	$(this).prop("checked",false);	
+	});
+	//obtener el checkbox de esa linea
+	$(this).parent().parent().siblings().find(".checkthis").prop("checked",true); 
+	$(".count-sel").each(function(){$(this).text(1)});
+	 $(".count-sel").trigger("text_change");  
+	});
+	
+	function confirm_remove(){
+			$("#frm-cerv").attr("action","<?php echo ROOT_PATH . '/admin/borrar_cerveceria'?>");
+			$("#frm-cerv").submit();
+		}	
+	
+
+  //acciones boton editar
+  $(".btn-edit").click(function(evt){
+	evt.preventDefault();
+	$("input[type=checkbox]").each(function(){
+	$(this).prop("checked",false);	
+	});
+	//obtener el checkbox de esa linea
+	$(this).parent().parent().siblings().find(".checkthis").prop("checked",true); 
+	$(".count-sel").each(function(){$(this).text(1)});
+	 $(".count-sel").trigger("text_change");
+		selectedUserIndex = $(this).parent().parent().siblings().find(".checkthis").val();
+
+	
+	
+
+$("#nombre").val(usuarios[selectedUserIndex].data.nombre);
+$("#direccion").val(usuarios[selectedUserIndex].data.direccion);
+$("#telefono").val(usuarios[selectedUserIndex].data.telefono);
+$("#userSelected").val(selectedUserIndex);	
+});
+	
+	function guardar_edicion(){
+		$("#frm-cerv").attr("action","<?php echo ROOT_PATH . '/admin/borrar_usuarios'?>");
+		$("#frm-cerv").submit();
+	}
+	
+//cargar usuarios
+var selectedUserIndex = -1;	
+var usuarios = <?php echo json_encode($cervecerias) ?>
+
+
+
+	</script>
+    
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Borrar cerveceria</h4>
+      </div>
+          <div class="modal-body">
+       
+       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Esta seguro que desea eliminar esta cerveceria?</div>
+       
+      </div>
+        <div class="modal-footer ">
+        <button type="button" onclick="confirm_remove()" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>Si</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+  </div>
+  
+     <div class="modal fade" id="delete_multiple" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Borrar cervecerias</h4>
+      </div>
+          <div class="modal-body">
+       
+       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Esta seguro que desea eliminar <span class="count-sel"></span> cervecerias ?</div>
+       
+      </div>
+        <div class="modal-footer ">
+        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="confirm_remove()"><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+  </div>
+  
