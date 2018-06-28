@@ -124,9 +124,7 @@ require("models/abstractModel.php");
 
 		$conn = connect();
 
-
-
-		$sql = "INSERT INTO ofertas (titulo,id_cerveceria, fecha_desde, fecha_hasta, descripcion, tipo_id) 
+		$sql = "INSERT INTO ofertas (titulo,cerveceria_id, fecha_desde, fecha_hasta, descripcion, tipo_id) 
 
 		values ('$titulo','$id_cerveceria','$fecha_desde','$fecha_hasta','$descripcion','$id_tipo')";
 
