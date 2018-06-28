@@ -6,8 +6,7 @@
 	
 	}
 
-	function info($id){
-		//mostrar info cerveceria + info de promo
+	function info($id){		//agregar cerveceria + direccion y telefono		
 		
 	}
 
@@ -28,7 +27,7 @@
 		$numeroPaginas = ceil($cantidadOfertas/$cantidadPorPagina);
 
 		$vars = array();
-		if($pagina == null || $pagina == 1){
+		if($pagina == null || $pagina == 1){			if($pagina==null) $pagina = 1;	
 			$vars["pagina"] = Array("anterior"=>1,"siguiente"=>(($pagina + 1) <= $numeroPaginas) ? $pagina + 1 : $pagina,"actual"=>1);
 		}else{
 			$anterior = $pagina-1 <= 0 ? $pagina : $pagina -1 ;

@@ -1,7 +1,7 @@
 </div>
 <footer class="footer">
-<div class="container">
-<a href="<?php echo ROOT_PATH . '/contacto'?>"> Contacto </a>
+<div class="container"><h4>
+<a href="<?php echo ROOT_PATH . '/contacto'?>"><strong> Contacto </strong> </a></h4>
 <ul class="footer-line">
  <?php                    
 if(!isset($_SESSION["tipo_usuario"])){
