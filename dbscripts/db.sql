@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `cerventum` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `cerventum`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win32 (AMD64)
 --
 -- Host: localhost    Database: cerventum
@@ -31,7 +33,7 @@ CREATE TABLE `cerveceria` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `cerveceria_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +42,7 @@ CREATE TABLE `cerveceria` (
 
 LOCK TABLES `cerveceria` WRITE;
 /*!40000 ALTER TABLE `cerveceria` DISABLE KEYS */;
+INSERT INTO `cerveceria` VALUES (7,44,'Cervesia','Francia 1234','(1231) 231-2312'),(8,45,'LuchitosBurguer','nose123','(2131) 234-1241');
 /*!40000 ALTER TABLE `cerveceria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,6 +71,7 @@ CREATE TABLE `cerveceria_horarios` (
 
 LOCK TABLES `cerveceria_horarios` WRITE;
 /*!40000 ALTER TABLE `cerveceria_horarios` DISABLE KEYS */;
+INSERT INTO `cerveceria_horarios` VALUES (7,'20:30','00:30',1),(8,'20:30','22:30',1);
 /*!40000 ALTER TABLE `cerveceria_horarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +117,7 @@ CREATE TABLE `ofertas` (
   PRIMARY KEY (`id`),
   KEY `cerv_id_idx` (`cerveceria_id`),
   CONSTRAINT `cerv_id` FOREIGN KEY (`cerveceria_id`) REFERENCES `cerveceria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +126,7 @@ CREATE TABLE `ofertas` (
 
 LOCK TABLES `ofertas` WRITE;
 /*!40000 ALTER TABLE `ofertas` DISABLE KEYS */;
+INSERT INTO `ofertas` VALUES (14,7,'2018-06-22 23:00:00','2018-06-16 10:00:00','algo',1,'2x1 en tragos'),(15,7,'2018-06-22 22:22:00','2018-06-22 22:22:00','asdasd',1,'50% en tragos'),(17,8,'2018-06-22 22:22:00','2018-06-15 22:02:00','qwe',1,'aadd'),(18,8,'2000-01-20 20:30:00','2000-01-20 22:30:00','asdasf',3,'50% en tragos');
 /*!40000 ALTER TABLE `ofertas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +201,7 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `nombre` (`usuario`),
   KEY `tipo_idx` (`tipo`),
   CONSTRAINT `tipo` FOREIGN KEY (`tipo`) REFERENCES `tipo_usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +210,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (40,'admin','21232f297a57a5a743894a0e4a801fc3',1,1,'admin','admin','admin@admin',NULL);
+INSERT INTO `usuarios` VALUES (40,'admin','21232f297a57a5a743894a0e4a801fc3',1,1,'admin','admin','admin@admin',NULL),(44,'axel','81dc9bdb52d04dc20036dbd8313ed055',3,1,'axel','vazquez','axel_012@hotmail.com.ar','f6d31128b4c895ece3864bdfc11b8f64'),(45,'axel2','81dc9bdb52d04dc20036dbd8313ed055',3,1,'asd','asd','asdafa@algoasd','1ee5406f7756b364f8110f38164a2454'),(46,'algo','81dc9bdb52d04dc20036dbd8313ed055',2,1,'asda','asdasd','asd@fgh','4cef85e3db9dda5367fbf0a8b6e459fa');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -218,4 +223,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-28 18:50:18
+-- Dump completed on 2018-06-29 13:20:13

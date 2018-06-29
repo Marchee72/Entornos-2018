@@ -2,7 +2,6 @@
 
 define("ROOT_PATH","/Entornos-2018");
 
-//$ROOT_PATH = "Entornos-2018";
 
 if (isset($_GET['url'])){ 
 

@@ -130,7 +130,7 @@ class admin{
 		$cantidad = model::contarcervecerias();
 
 		$numeroPaginas = ceil($cantidad/$cantidadPorPagina);
-
+		if($pagina = 0) $pagina = 1;
 		if($pagina > $numeroPaginas){
 				header("Location:".ROOT_PATH."/admin/listarcervecerias/" . $numeroPaginas);	
 		}
